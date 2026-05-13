@@ -1,10 +1,20 @@
 {
   "name": "@ai-chat/components",
   "version": "0.1.0",
+  "description": "Web Components for AI Chat UI Kit (Lit)",
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/edenxpzhang/ai-chat-ui-kit.git",
+    "directory": "packages/components"
+  },
+  "homepage": "https://edenxpzhang.github.io/ai-chat-ui-kit/",
+  "bugs": {
+    "url": "https://github.com/edenxpzhang/ai-chat-ui-kit/issues"
+  },
   "files": ["dist"],
   "scripts": {
     "dev": "tsup --watch",
