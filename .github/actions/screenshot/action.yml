@@ -1,0 +1,35 @@
+/**
+ * @generated-by AI: edenxpzhang
+ * @generated-date 2026-05-13
+ */
+name: Generate Theme Screenshots
+description: Take screenshots of all 6 chat UI themes
+
+inputs:
+  output-dir:
+    description: Directory to save screenshots
+    required: false
+    default: docs/screenshots
+
+runs:
+  using: composite
+  steps:
+    - name: Install Playwright
+      shell: bash
+      run: |
+        npm install -g playwright
+        playwright install chromium
+
+    - name: Take screenshots
+      shell: bash
+      run: |
+        mkdir -p ${{ inputs.output-dir }}
+        for theme in minimal neon glass terminal gradient corporate; do
+          echo "Screenshotting ${theme}..."
+          playwright screenshot \
+            --url "file://$(pwd)/docs/chat-style-${theme}.html" \
+            --output "${{ inputs.output-dir }}/${theme}.png" \
+            --viewport "400,700" \
+            --timeout 10000 || true
+        done
+        echo "Screenshots saved to ${{ inputs.output-dir }}/"

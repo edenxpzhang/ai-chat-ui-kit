@@ -1,0 +1,118 @@
+/**
+ * @generated-by AI: edenxpzhang
+ * @generated-date 2026-05-13
+ */
+:host {
+  display: block;
+}
+
+.markdown-content {
+  line-height: 1.6;
+}
+
+.markdown-content h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+  font-weight: 600;
+}
+
+.markdown-content h2 {
+  font-size: 1.5em;
+  margin: 0.83em 0;
+  font-weight: 600;
+}
+
+.markdown-content h3 {
+  font-size: 1.17em;
+  margin: 1em 0;
+  font-weight: 600;
+}
+
+.markdown-content p {
+  margin: 0.5em 0;
+}
+
+.markdown-content code {
+  background-color: var(--ai-bg-secondary, #f5f5f5);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9em;
+}
+
+.markdown-content pre {
+  background-color: var(--ai-bg-secondary, #f5f5f5);
+  padding: 12px;
+  border-radius: var(--ai-border-radius, 8px);
+  overflow-x: auto;
+  margin: 0.5em 0;
+}
+
+.markdown-content pre code {
+  background-color: transparent;
+  padding: 0;
+}
+
+.markdown-content blockquote {
+  border-left: 4px solid var(--ai-border, #e8e8e8);
+  padding-left: 12px;
+  margin: 0.5em 0;
+  color: var(--ai-text-secondary, #666666);
+}
+
+.markdown-content ul,
+.markdown-content ol {
+  padding-left: 2em;
+  margin: 0.5em 0;
+}
+
+.markdown-content a {
+  color: var(--ai-primary, #1677ff);
+  text-decoration: none;
+}
+
+.markdown-content a:hover {
+  text-decoration: underline;
+}
+
+.markdown-content table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0.5em 0;
+}
+
+.markdown-content th,
+.markdown-content td {
+  border: 1px solid var(--ai-border, #e8e8e8);
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.markdown-content th {
+  background-color: var(--ai-bg-secondary, #f5f5f5);
+  font-weight: 600;
+}
+
+/* Mermaid 图表容器 */
+.mermaid-container {
+  margin: 1em 0;
+  padding: 12px;
+  background-color: var(--ai-bg, #ffffff);
+  border: 1px solid var(--ai-border, #e8e8e8);
+  border-radius: var(--ai-border-radius, 8px);
+  overflow-x: auto;
+  text-align: center;
+}
+
+/* Latex 公式 */
+.latex-formula {
+  font-style: italic;
+  padding: 0 4px;
+}
+
+.latex-block {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+  font-size: 1.2em;
+}

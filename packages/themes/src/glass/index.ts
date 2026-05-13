@@ -1,0 +1,52 @@
+/**
+ * @generated-by AI: edenxpzhang
+ * @generated-date 2026-05-13
+ */
+
+import type { ThemeConfig } from '../types.js';
+import themeStyles from './theme.css?raw';
+
+export const glassTheme: ThemeConfig = {
+  name: 'glass',
+  variables: {
+    '--ai-primary': 'rgba(102, 126, 234, 0.6)',
+    '--ai-primary-hover': 'rgba(102, 126, 234, 0.8)',
+    '--ai-primary-active': 'rgba(82, 106, 214, 0.9)',
+    '--ai-bg-primary': 'rgba(255, 255, 255, 0.25)',
+    '--ai-bg-secondary': 'rgba(255, 255, 255, 0.3)',
+    '--ai-bg-tertiary': 'rgba(255, 255, 255, 0.2)',
+    '--ai-bg-chat': 'transparent',
+    '--ai-text-primary': '#ffffff',
+    '--ai-text-secondary': 'rgba(255, 255, 255, 0.8)',
+    '--ai-text-tertiary': 'rgba(255, 255, 255, 0.6)',
+    '--ai-text-inverse': '#333333',
+    '--ai-message-user-bg': 'rgba(102, 126, 234, 0.6)',
+    '--ai-message-user-text': '#ffffff',
+    '--ai-message-ai-bg': 'rgba(255, 255, 255, 0.4)',
+    '--ai-message-ai-text': '#333333',
+    '--ai-message-border': 'rgba(255, 255, 255, 0.6)',
+    '--ai-input-bg': 'rgba(255, 255, 255, 0.3)',
+    '--ai-input-border': 'rgba(255, 255, 255, 0.5)',
+    '--ai-input-focus-border': 'rgba(255, 255, 255, 0.8)',
+    '--ai-input-text': '#ffffff',
+    '--ai-input-placeholder': 'rgba(255, 255, 255, 0.7)',
+    '--ai-tool-call-bg': 'rgba(255, 255, 255, 0.3)',
+    '--ai-tool-call-border': 'rgba(255, 255, 255, 0.5)',
+    '--ai-tool-call-success': '#52c41a',
+    '--ai-tool-call-error': '#ff4d4f',
+    '--ai-tool-call-running': 'rgba(102, 126, 234, 0.6)',
+    '--ai-shadow-sm': '0 2px 8px rgba(31, 38, 135, 0.1)',
+    '--ai-shadow-md': '0 4px 16px rgba(31, 38, 135, 0.2)',
+    '--ai-shadow-lg': '0 8px 32px rgba(31, 38, 135, 0.37)',
+    '--ai-radius-sm': '8px',
+    '--ai-radius-md': '16px',
+    '--ai-radius-lg': '20px',
+    '--ai-radius-xl': '24px',
+    '--ai-spacing-xs': '4px',
+    '--ai-spacing-sm': '8px',
+    '--ai-spacing-md': '14px',
+    '--ai-spacing-lg': '20px',
+    '--ai-spacing-xl': '24px',
+  },
+  styles: themeStyles,
+};

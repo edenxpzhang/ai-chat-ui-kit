@@ -1,0 +1,44 @@
+# @generated-by AI: edenxpzhang
+# @generated-date 2026-05-13
+
+# Dependencies
+node_modules/
+.pnpm-debug.log*
+
+# Build outputs
+dist/
+build/
+*.tgz
+*.tar.gz
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Testing
+coverage/
+.nyc_output/
+
+# Misc
+.env
+.env.local
+.env.*.local
+.history/
+
+# Turbo
+.turbo/
+
+# PNPM
+.pnpm-store/

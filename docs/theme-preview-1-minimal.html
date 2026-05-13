@@ -1,0 +1,74 @@
+<!--
+  @generated-by AI: edenxpzhang
+  @generated-date 2026-05-13
+
+  Theme Preview · Minimal —— 真实组件 DOM + minimal 主题
+-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>主题预览 · 01 Minimal Clean | AI Chat UI Kit</title>
+  <link rel="stylesheet" href="../packages/themes/src/minimal/theme.css" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      background: #f5f5f7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .stage { width: 400px; height: 700px; }
+  </style>
+</head>
+<body data-theme="minimal">
+  <div class="stage">
+    <div class="ai-chat" data-theme="minimal">
+      <header class="ai-chat__header">
+        <div class="ai-chat__avatar">🤖</div>
+        <div class="ai-chat__title-group">
+          <h3 class="ai-chat__title">AI Assistant</h3>
+          <p class="ai-chat__subtitle">在线 · 随时为您服务</p>
+        </div>
+      </header>
+      <div class="ai-chat__messages">
+        <div class="ai-message ai-message--assistant">
+          <div class="ai-message__avatar">AI</div>
+          <div class="ai-message__body">
+            <div class="ai-message__content">您好！我是 AI 助手，有什么可以帮您的吗？😊</div>
+            <div class="ai-message__time">14:30</div>
+          </div>
+        </div>
+        <div class="ai-message ai-message--user">
+          <div class="ai-message__avatar">我</div>
+          <div class="ai-message__body">
+            <div class="ai-message__content">这个 UI 看起来不错</div>
+            <div class="ai-message__time">14:31</div>
+          </div>
+        </div>
+        <div class="ai-message ai-message--assistant">
+          <div class="ai-message__avatar">AI</div>
+          <div class="ai-message__body">
+            <div class="ai-message__content">谢谢！这是基于 Web Components 的真实组件渲染效果。</div>
+            <div class="ai-message__time">14:31</div>
+          </div>
+        </div>
+        <div class="ai-typing-indicator">
+          <span class="ai-typing-indicator__dot"></span>
+          <span class="ai-typing-indicator__dot"></span>
+          <span class="ai-typing-indicator__dot"></span>
+        </div>
+      </div>
+      <div class="ai-input">
+        <div class="ai-input__wrapper">
+          <textarea class="ai-input__textarea" placeholder="输入消息..." rows="1"></textarea>
+          <button class="ai-input__send">↑</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

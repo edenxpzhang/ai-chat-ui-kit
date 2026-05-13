@@ -1,0 +1,414 @@
+<!--
+  @generated-by AI: edenxpzhang
+  @generated-date 2026-05-13
+-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Chat UI Kit - 原生 HTML 示例</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    #app {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      padding: 16px 24px;
+      background: #1677ff;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .header h1 {
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .theme-selector {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .theme-btn {
+      padding: 6px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      background: transparent;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.3s;
+    }
+
+    .theme-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .theme-btn.active {
+      background: rgba(255, 255, 255, 0.25);
+      border-color: white;
+    }
+
+    .chat-container {
+      flex: 1;
+      height: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div class="header">
+      <h1>🤖 AI Chat UI Kit 示例</h1>
+      <div class="theme-selector">
+        <button class="theme-btn active" data-theme="minimal">Minimal</button>
+        <button class="theme-btn" data-theme="neon">Neon</button>
+        <button class="theme-btn" data-theme="glass">Glass</button>
+        <button class="theme-btn" data-theme="terminal">Terminal</button>
+        <button class="theme-btn" data-theme="gradient">Gradient</button>
+        <button class="theme-btn" data-theme="corporate">Corporate</button>
+      </div>
+    </div>
+
+    <div class="chat-container">
+      <ai-chat id="chat"></ai-chat>
+    </div>
+  </div>
+
+  <script>
+    // 主题配置
+    const themes = {
+      minimal: {
+        name: 'minimal',
+        variables: {
+          '--ai-primary': '#0071e3',
+          '--ai-bg-chat': '#f5f5f7',
+          '--ai-message-user-bg': '#0071e3',
+          '--ai-message-ai-bg': '#e5e5ea',
+          '--ai-text-primary': '#1d1d1f',
+        }
+      },
+      neon: {
+        name: 'neon',
+        variables: {
+          '--ai-primary': '#7f5af0',
+          '--ai-bg-chat': '#0a0a0a',
+          '--ai-message-user-bg': 'linear-gradient(135deg, #7f5af0, #ff006e)',
+          '--ai-message-ai-bg': '#16213e',
+          '--ai-text-primary': '#00ffff',
+        }
+      },
+      glass: {
+        name: 'glass',
+        variables: {
+          '--ai-primary': 'rgba(102, 126, 234, 0.6)',
+          '--ai-bg-chat': 'transparent',
+          '--ai-message-user-bg': 'rgba(102, 126, 234, 0.6)',
+          '--ai-message-ai-bg': 'rgba(255, 255, 255, 0.4)',
+          '--ai-text-primary': '#ffffff',
+        }
+      },
+      terminal: {
+        name: 'terminal',
+        variables: {
+          '--ai-primary': '#00ff00',
+          '--ai-bg-chat': '#0a0a0a',
+          '--ai-message-user-bg': 'transparent',
+          '--ai-message-ai-bg': 'transparent',
+          '--ai-text-primary': '#00ff00',
+        }
+      },
+      gradient: {
+        name: 'gradient',
+        variables: {
+          '--ai-primary': 'linear-gradient(135deg, #f093fb, #f5576c)',
+          '--ai-bg-chat': '#ffffff',
+          '--ai-message-user-bg': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          '--ai-message-ai-bg': '#ffffff',
+          '--ai-text-primary': '#333333',
+        },
+        bodyBg: 'linear-gradient(135deg, #f093fb 0%, #f5576c 25%, #4facfe 50%, #00f2fe 75%, #43e97b 100%)'
+      },
+      corporate: {
+        name: 'corporate',
+        variables: {
+          '--ai-primary': '#1890ff',
+          '--ai-bg-chat': '#fafafa',
+          '--ai-message-user-bg': '#1890ff',
+          '--ai-message-ai-bg': '#ffffff',
+          '--ai-text-primary': '#333333',
+        }
+      }
+    };
+
+    // 应用主题
+    function applyTheme(themeName) {
+      const theme = themes[themeName];
+      if (!theme) return;
+
+      const root = document.documentElement;
+      Object.entries(theme.variables).forEach(([key, value]) => {
+        root.style.setProperty(key, value);
+      });
+
+      // 设置/清除 body 背景（gradient 主题专用）
+      if (theme.bodyBg) {
+        document.body.style.background = theme.bodyBg;
+      } else {
+        document.body.style.background = '';
+      }
+
+      // 更新按钮状态
+      document.querySelectorAll('.theme-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.theme === themeName);
+      });
+
+      console.log(`已切换到 ${theme.name} 主题`);
+    }
+
+    // 绑定主题切换按钮
+    document.querySelectorAll('.theme-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        applyTheme(btn.dataset.theme);
+      });
+    });
+
+    // 模拟 AI Chat 组件
+    class AIChat extends HTMLElement {
+      constructor() {
+        super();
+        this.attachShadow({ mode: 'open' });
+        this.messages = [
+          { role: 'assistant', content: '你好！我是 AI 助手，有什么可以帮助你的吗？' }
+        ];
+        this.render();
+      }
+
+      render() {
+        const messagesHTML = this.messages.map(msg => {
+          const isUser = msg.role === 'user';
+          return `
+            <div class="ai-message ${isUser ? 'ai-message--user' : 'ai-message--assistant'}">
+              <div class="ai-message__avatar">${isUser ? '我' : 'AI'}</div>
+              <div class="ai-message__content">${msg.content}</div>
+            </div>
+          `;
+        }).join('');
+
+        this.shadowRoot.innerHTML = `
+          <style>
+            :host {
+              display: flex;
+              flex-direction: column;
+              height: 100%;
+              background: var(--ai-bg-chat, #f0f2f5);
+              font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            }
+
+            .messages {
+              flex: 1;
+              overflow-y: auto;
+              padding: 16px;
+              display: flex;
+              flex-direction: column;
+              gap: 12px;
+            }
+
+            .ai-message {
+              display: flex;
+              gap: 8px;
+              max-width: 80%;
+              animation: fadeIn 0.3s ease-out;
+            }
+
+            .ai-message--user {
+              flex-direction: row-reverse;
+              margin-left: auto;
+            }
+
+            .ai-message--assistant {
+              margin-right: auto;
+            }
+
+            .ai-message__avatar {
+              width: 36px;
+              height: 36px;
+              border-radius: 50%;
+              flex-shrink: 0;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 14px;
+              background: var(--ai-primary, #1677ff);
+              color: white;
+            }
+
+            .ai-message--assistant .ai-message__avatar {
+              background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            }
+
+            .ai-message__content {
+              padding: 12px 16px;
+              border-radius: 12px;
+              line-height: 1.6;
+              word-break: break-word;
+              box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+            }
+
+            .ai-message--user .ai-message__content {
+              background: var(--ai-message-user-bg, #1677ff);
+              color: white;
+              border-top-right-radius: 4px;
+            }
+
+            .ai-message--assistant .ai-message__content {
+              background: var(--ai-message-ai-bg, #ffffff);
+              color: var(--ai-text-primary, rgba(0, 0, 0, 0.88));
+              border: 1px solid #e8e8e8;
+              border-top-left-radius: 4px;
+            }
+
+            .input-area {
+              padding: 16px;
+              background: white;
+              border-top: 1px solid #e8e8e8;
+            }
+
+            .input-wrapper {
+              display: flex;
+              gap: 8px;
+              align-items: flex-end;
+              background: white;
+              border: 1px solid #d9d9d9;
+              border-radius: 8px;
+              padding: 8px 12px;
+              transition: border-color 0.3s;
+            }
+
+            .input-wrapper:focus-within {
+              border-color: var(--ai-primary, #1677ff);
+              box-shadow: 0 0 0 2px rgba(22, 119, 255, 0.15);
+            }
+
+            textarea {
+              flex: 1;
+              border: none;
+              outline: none;
+              resize: none;
+              font-size: 14px;
+              line-height: 1.6;
+              min-height: 24px;
+              max-height: 120px;
+              font-family: inherit;
+              padding: 0;
+              background: transparent;
+            }
+
+            button {
+              background: var(--ai-primary, #1677ff);
+              color: white;
+              border: none;
+              border-radius: 8px;
+              padding: 8px 20px;
+              cursor: pointer;
+              font-size: 14px;
+              transition: background 0.3s;
+              flex-shrink: 0;
+            }
+
+            button:hover {
+              opacity: 0.85;
+            }
+
+            @keyframes fadeIn {
+              from {
+                opacity: 0;
+                transform: translateY(10px);
+              }
+              to {
+                opacity: 1;
+                transform: translateY(0);
+              }
+            }
+          </style>
+          <div class="messages" id="messages">
+            ${messagesHTML}
+          </div>
+          <div class="input-area">
+            <div class="input-wrapper">
+              <textarea id="input" rows="1" placeholder="输入消息..."></textarea>
+              <button id="sendBtn">发送</button>
+            </div>
+          </div>
+        `;
+
+        this.bindEvents();
+        this.scrollToBottom();
+      }
+
+      bindEvents() {
+        const input = this.shadowRoot.getElementById('input');
+        const sendBtn = this.shadowRoot.getElementById('sendBtn');
+        const messages = this.shadowRoot.getElementById('messages');
+
+        const sendMessage = () => {
+          const text = input.value.trim();
+          if (!text) return;
+
+          this.messages.push({ role: 'user', content: text });
+          input.value = '';
+          this.render();
+
+          setTimeout(() => {
+            this.messages.push({
+              role: 'assistant',
+              content: `收到你的消息："${text}"。这是 AI 的回复。`
+            });
+            this.render();
+          }, 1000);
+        };
+
+        sendBtn.addEventListener('click', sendMessage);
+        input.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            sendMessage();
+          }
+        });
+      }
+
+      scrollToBottom() {
+        const messages = this.shadowRoot.getElementById('messages');
+        if (messages) {
+          messages.scrollTop = messages.scrollHeight;
+        }
+      }
+    }
+
+    // 注册组件
+    customElements.define('ai-chat', AIChat);
+
+    console.log('✅ AI Chat 组件已加载');
+    console.log('💡 点击右上角按钮切换主题');
+  </script>
+</body>
+</html>

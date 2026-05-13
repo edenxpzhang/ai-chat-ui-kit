@@ -1,0 +1,29 @@
+{
+  "name": "@ai-chat/themes",
+  "version": "0.1.0",
+  "description": "Theme packages for AI Chat UI Kit",
+  "main": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./default": "./src/default/index.ts",
+    "./bubble": "./src/bubble/index.ts",
+    "./flat": "./src/flat/index.ts"
+  },
+  "files": ["src"],
+  "scripts": {
+    "dev": "tsup --watch",
+    "build": "tsup"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "copyfiles": "^2.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@ai-chat/components": {
+      "optional": true
+    }
+  },
+  "keywords": ["ai", "chat", "theme", "ui"],
+  "author": "edenxpzhang",
+  "license": "MIT"
+}

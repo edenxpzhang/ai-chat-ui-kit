@@ -1,0 +1,52 @@
+/**
+ * @generated-by AI: edenxpzhang
+ * @generated-date 2026-05-13
+ *
+ * 兜底样式 —— 实际视觉由主题接管
+ */
+
+ai-input {
+  display: block;
+}
+
+ai-input .ai-input {
+  padding: 12px 16px;
+}
+
+ai-input .ai-input__wrapper {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+ai-input .ai-input__textarea {
+  flex: 1;
+  resize: none;
+  outline: none;
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.5;
+  min-height: 40px;
+  max-height: 120px;
+  background: #fff;
+  color: inherit;
+}
+
+ai-input .ai-input__send {
+  flex-shrink: 0;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  background: #1677ff;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+ai-input .ai-input__send:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

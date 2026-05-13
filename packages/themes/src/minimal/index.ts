@@ -1,0 +1,52 @@
+/**
+ * @generated-by AI: edenxpzhang
+ * @generated-date 2026-05-13
+ */
+
+import type { ThemeConfig } from '../types.js';
+import themeStyles from './theme.css?raw';
+
+export const minimalTheme: ThemeConfig = {
+  name: 'minimal',
+  variables: {
+    '--ai-primary': '#0071e3',
+    '--ai-primary-hover': '#0077ed',
+    '--ai-primary-active': '#0056b3',
+    '--ai-bg-primary': '#ffffff',
+    '--ai-bg-secondary': '#f5f5f7',
+    '--ai-bg-tertiary': '#fafafa',
+    '--ai-bg-chat': '#f5f5f7',
+    '--ai-text-primary': '#1d1d1f',
+    '--ai-text-secondary': '#86868b',
+    '--ai-text-tertiary': '#a1a1a6',
+    '--ai-text-inverse': '#ffffff',
+    '--ai-message-user-bg': '#0071e3',
+    '--ai-message-user-text': '#ffffff',
+    '--ai-message-ai-bg': '#e5e5ea',
+    '--ai-message-ai-text': '#1d1d1f',
+    '--ai-message-border': '#e5e5ea',
+    '--ai-input-bg': '#ffffff',
+    '--ai-input-border': '#e5e5ea',
+    '--ai-input-focus-border': '#0071e3',
+    '--ai-input-text': '#1d1d1f',
+    '--ai-input-placeholder': '#86868b',
+    '--ai-tool-call-bg': '#f6f8fa',
+    '--ai-tool-call-border': '#d1d9e0',
+    '--ai-tool-call-success': '#52c41a',
+    '--ai-tool-call-error': '#ff4d4f',
+    '--ai-tool-call-running': '#0071e3',
+    '--ai-shadow-sm': '0 1px 2px rgba(0, 0, 0, 0.06)',
+    '--ai-shadow-md': '0 2px 8px rgba(0, 0, 0, 0.08)',
+    '--ai-shadow-lg': '0 4px 16px rgba(0, 0, 0, 0.1)',
+    '--ai-radius-sm': '6px',
+    '--ai-radius-md': '12px',
+    '--ai-radius-lg': '18px',
+    '--ai-radius-xl': '24px',
+    '--ai-spacing-xs': '4px',
+    '--ai-spacing-sm': '8px',
+    '--ai-spacing-md': '12px',
+    '--ai-spacing-lg': '16px',
+    '--ai-spacing-xl': '24px',
+  },
+  styles: themeStyles,
+};

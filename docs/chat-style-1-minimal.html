@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Style 1: Minimal Clean - AI Chat UI</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f7; height: 100vh; display: flex; justify-content: center; align-items: center; }
+    .chat-container { width: 400px; height: 700px; background: white; border-radius: 24px; box-shadow: 0 8px 32px rgba(0,0,0,0.1); display: flex; flex-direction: column; overflow: hidden; }
+    .chat-header { padding: 20px; background: white; border-bottom: 1px solid #e5e5ea; display: flex; align-items: center; gap: 12px; }
+    .chat-header img { width: 40px; height: 40px; border-radius: 50%; }
+    .chat-header h3 { font-size: 16px; font-weight: 600; color: #1d1d1f; }
+    .chat-header p { font-size: 12px; color: #86868b; }
+    .chat-messages { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
+    .message { max-width: 75%; padding: 12px 16px; border-radius: 18px; font-size: 14px; line-height: 1.5; }
+    .message.user { align-self: flex-end; background: #0071e3; color: white; border-bottom-right-radius: 6px; }
+    .message.ai { align-self: flex-start; background: #e5e5ea; color: #1d1d1f; border-bottom-left-radius: 6px; }
+    .chat-input { padding: 16px 20px; background: white; border-top: 1px solid #e5e5ea; display: flex; gap: 12px; align-items: center; }
+    .chat-input input { flex: 1; padding: 12px 16px; border: 1px solid #e5e5ea; border-radius: 20px; font-size: 14px; outline: none; transition: border-color 0.2s; }
+    .chat-input input:focus { border-color: #0071e3; }
+    .chat-input button { width: 40px; height: 40px; border: none; background: #0071e3; color: white; border-radius: 50%; cursor: pointer; font-size: 18px; transition: transform 0.2s; }
+    .chat-input button:hover { transform: scale(1.05); }
+    .typing { display: flex; gap: 4px; padding: 12px 16px; }
+    .typing span { width: 6px; height: 6px; background: #86868b; border-radius: 50%; animation: typing 1.4s infinite; }
+    .typing span:nth-child(2) { animation-delay: 0.2s; }
+    .typing span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typing { 0%, 60%, 100% { transform: translateY(0); } 30% { transform: translateY(-8px); } }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-header">
+      <div style="width:40px;height:40px;background:linear-gradient(135deg,#0071e3,#42a4ff);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:18px;">🤖</div>
+      <div>
+        <h3>AI Assistant</h3>
+        <p>在线 · 随时为您服务</p>
+      </div>
+    </div>
+    <div class="chat-messages" id="messages">
+      <div class="message ai">您好！我是 AI 助手，有什么可以帮您的吗？😊</div>
+    </div>
+    <div class="chat-input">
+      <input type="text" id="input" placeholder="输入消息..." onkeypress="if(event.key==='Enter')sendMessage()">
+      <button onclick="sendMessage()">↑</button>
+    </div>
+  </div>
+  <script>
+    const responses = [
+      '这是一个很好的问题！让我想想...',
+      '根据我的分析，我认为...',
+      '当然可以！我很乐意帮助您。',
+      '有趣的观点！从另一个角度来看...',
+      '让我为您详细解释一下。'
+    ];
+    function sendMessage() {
+      const input = document.getElementById('input');
+      const text = input.value.trim();
+      if (!text) return;
+      const messages = document.getElementById('messages');
+      messages.innerHTML += `<div class="message user">${text}</div>`;
+      input.value = '';
+      setTimeout(() => {
+        messages.innerHTML += `<div class="typing"><span></span><span></span><span></span></div>`;
+        messages.scrollTop = messages.scrollHeight;
+        setTimeout(() => {
+          messages.querySelector('.typing').remove();
+          const reply = responses[Math.floor(Math.random() * responses.length)];
+          messages.innerHTML += `<div class="message ai">${reply}</div>`;
+          messages.scrollTop = messages.scrollHeight;
+        }, 1500);
+      }, 500);
+      messages.scrollTop = messages.scrollHeight;
+    }
+  </script>
+</body>
+</html>

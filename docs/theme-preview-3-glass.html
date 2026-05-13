@@ -1,0 +1,77 @@
+<!--
+  @generated-by AI: edenxpzhang
+  @generated-date 2026-05-13
+
+  Theme Preview · Glass —— 真实组件 DOM + glass 主题
+-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>主题预览 · 03 Glassmorphism | AI Chat UI Kit</title>
+  <link rel="stylesheet" href="../packages/themes/src/glass/theme.css" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      overflow: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      pointer-events: none;
+    }
+    body::before {
+      width: 400px; height: 400px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      top: -100px; left: -100px;
+      filter: blur(60px);
+      position: absolute;
+    }
+    .stage { width: 420px; height: 700px; position: relative; z-index: 1; }
+  </style>
+</head>
+<body data-theme="glass">
+  <div class="stage">
+    <div class="ai-chat" data-theme="glass">
+      <header class="ai-chat__header">
+        <div class="ai-chat__avatar">✨</div>
+        <div class="ai-chat__title-group">
+          <h3 class="ai-chat__title">Glass AI</h3>
+          <p class="ai-chat__subtitle">透明 · 优雅 · 智能</p>
+        </div>
+      </header>
+      <div class="ai-chat__messages">
+        <div class="ai-message ai-message--assistant">
+          <div class="ai-message__body">
+            <div class="ai-message__content">您好！我是 Glass AI，采用最新的毛玻璃设计风格。有什么可以帮您的吗？✨</div>
+          </div>
+        </div>
+        <div class="ai-message ai-message--user">
+          <div class="ai-message__body">
+            <div class="ai-message__content">这个透明效果真不错</div>
+          </div>
+        </div>
+        <div class="ai-message ai-message--assistant">
+          <div class="ai-message__body">
+            <div class="ai-message__content">谢谢喜欢！基于 backdrop-filter 实现的现代风格。</div>
+          </div>
+        </div>
+      </div>
+      <div class="ai-input">
+        <div class="ai-input__wrapper">
+          <textarea class="ai-input__textarea" placeholder="输入消息..." rows="1"></textarea>
+          <button class="ai-input__send">➤</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

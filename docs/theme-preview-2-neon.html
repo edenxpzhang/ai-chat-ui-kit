@@ -1,0 +1,73 @@
+<!--
+  @generated-by AI: edenxpzhang
+  @generated-date 2026-05-13
+
+  Theme Preview · Neon —— 真实组件 DOM + neon 主题
+-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>主题预览 · 02 Dark Neon | AI Chat UI Kit</title>
+  <link rel="stylesheet" href="../packages/themes/src/neon/theme.css" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      background: #0a0a0a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      overflow: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background:
+        radial-gradient(circle at 20% 50%, rgba(120, 0, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 50%, rgba(0, 255, 255, 0.1) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .stage { width: 450px; height: 700px; position: relative; z-index: 1; }
+  </style>
+</head>
+<body data-theme="neon">
+  <div class="stage">
+    <div class="ai-chat" data-theme="neon">
+      <header class="ai-chat__header">
+        <div class="ai-chat__avatar"></div>
+        <div class="ai-chat__title-group">
+          <h3 class="ai-chat__title">⚡ NEON AI</h3>
+          <p class="ai-chat__subtitle">● SYSTEM ONLINE</p>
+        </div>
+      </header>
+      <div class="ai-chat__messages">
+        <div class="ai-message ai-message--assistant">
+          <div class="ai-message__body">
+            <div class="ai-message__content">&gt; SYSTEM READY<br />&gt; 您好，我是 Neon AI<br />&gt; 随时准备为您服务_</div>
+          </div>
+        </div>
+        <div class="ai-message ai-message--user">
+          <div class="ai-message__body">
+            <div class="ai-message__content">&gt; 帮我分析下数据</div>
+          </div>
+        </div>
+        <div class="ai-message ai-message--assistant">
+          <div class="ai-message__body">
+            <div class="ai-message__content">&gt; 处理中...<br />&gt; 根据数据分析，我认为...</div>
+          </div>
+        </div>
+      </div>
+      <div class="ai-input">
+        <div class="ai-input__wrapper">
+          <textarea class="ai-input__textarea" placeholder="> 输入命令..." rows="1"></textarea>
+          <button class="ai-input__send">SEND ▸</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

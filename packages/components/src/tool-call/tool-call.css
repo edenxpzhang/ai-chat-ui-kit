@@ -1,0 +1,98 @@
+/**
+ * @generated-by AI: edenxpzhang
+ * @generated-date 2026-05-13
+ */
+:host {
+  display: block;
+}
+
+.tool-call {
+  border: 1px solid var(--ai-border, #e8e8e8);
+  border-radius: var(--ai-border-radius, 8px);
+  overflow: hidden;
+  font-size: 12px;
+}
+
+.tool-call-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background-color: var(--ai-bg-secondary, #f5f5f5);
+  cursor: pointer;
+  user-select: none;
+}
+
+.tool-call-header:hover {
+  background-color: var(--ai-border, #e8e8e8);
+}
+
+.tool-call-status {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.tool-call-status-pending {
+  background-color: #faad14;
+}
+
+.tool-call-status-running {
+  background-color: #1677ff;
+  animation: pulse 1.5s infinite;
+}
+
+.tool-call-status-completed {
+  background-color: #52c41a;
+}
+
+.tool-call-status-failed {
+  background-color: #ff4d4f;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.tool-call-name {
+  flex: 1;
+  font-weight: 500;
+  color: var(--ai-text, #333333);
+}
+
+.tool-call-toggle {
+  color: var(--ai-text-secondary, #666666);
+  font-size: 10px;
+}
+
+.tool-call-details {
+  padding: 12px;
+  border-top: 1px solid var(--ai-border, #e8e8e8);
+  background-color: var(--ai-bg, #ffffff);
+}
+
+.tool-call-section {
+  margin-bottom: 8px;
+}
+
+.tool-call-section:last-child {
+  margin-bottom: 0;
+}
+
+.tool-call-label {
+  font-weight: 500;
+  color: var(--ai-text-secondary, #666666);
+  margin-bottom: 4px;
+}
+
+.tool-call-content {
+  background-color: var(--ai-bg-secondary, #f5f5f5);
+  padding: 8px;
+  border-radius: 4px;
+  overflow-x: auto;
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  white-space: pre-wrap;
+  word-break: break-all;
+}

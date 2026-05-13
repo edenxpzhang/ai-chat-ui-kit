@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Style 4: Retro Terminal - AI Chat UI</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Courier New', monospace; background: #0c0c0c; height: 100vh; display: flex; justify-content: center; align-items: center; }
+    .scanline { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(0deg, rgba(0, 255, 0, 0.03) 0px, rgba(0, 255, 0, 0.03) 1px, transparent 1px, transparent 2px); pointer-events: none; z-index: 100; }
+    .chat-container { width: 650px; height: 720px; background: #0a0a0a; border: 2px solid #00ff00; border-radius: 8px; display: flex; flex-direction: column; box-shadow: 0 0 30px rgba(0, 255, 0, 0.3), inset 0 0 30px rgba(0, 255, 0, 0.05); position: relative; }
+    .chat-header { padding: 16px 20px; background: #0a0a0a; border-bottom: 1px solid #00ff00; display: flex; align-items: center; gap: 12px; }
+    .terminal-icon { color: #00ff00; font-size: 20px; animation: blink 1s infinite; }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+    .chat-header h3 { font-size: 14px; font-weight: normal; color: #00ff00; letter-spacing: 2px; }
+    .chat-header p { font-size: 11px; color: #008000; }
+    .chat-messages { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
+    .chat-messages::-webkit-scrollbar { width: 8px; }
+    .chat-messages::-webkit-scrollbar-thumb { background: #00ff00; border-radius: 0; }
+    .chat-messages::-webkit-scrollbar-track { background: #0a0a0a; }
+    .message { font-size: 13px; line-height: 1.6; padding: 8px 0; border-left: 2px solid transparent; padding-left: 12px; }
+    .message.user { color: #00ffff; border-left-color: #00ffff; }
+    .message.ai { color: #00ff00; border-left-color: #00ff00; }
+    .message .prefix { font-weight: bold; margin-right: 8px; }
+    .chat-input { padding: 16px 20px; background: #0a0a0a; border-top: 1px solid #00ff00; display: flex; gap: 12px; align-items: center; }
+    .prompt { color: #00ff00; font-size: 14px; }
+    .chat-input input { flex: 1; background: transparent; border: none; color: #00ff00; font-family: 'Courier New', monospace; font-size: 14px; outline: none; caret-color: #00ff00; }
+    .chat-input input::placeholder { color: #006600; }
+    .chat-input button { background: transparent; border: 1px solid #00ff00; color: #00ff00; padding: 8px 16px; cursor: pointer; font-family: 'Courier New', monospace; font-size: 12px; letter-spacing: 2px; transition: all 0.3s; }
+    .chat-input button:hover { background: #00ff00; color: #0a0a0a; }
+    .ascii-art { color: #00ff00; font-size: 10px; line-height: 1.2; white-space: pre; }
+  </style>
+</head>
+<body>
+  <div class="scanline"></div>
+  <div class="chat-container">
+    <div class="chat-header">
+      <span class="terminal-icon">●</span>
+      <div>
+        <h3>█ AI TERMINAL v2.0 █</h3>
+        <p>SYSTEM READY >_</p>
+      </div>
+    </div>
+    <div class="chat-messages" id="messages">
+      <div class="ascii-art">  ___ ___  ___  _   _
+ |_ _/ _ \|_ _|| \ | |
+  | | | | | | | |  \| |
+  | | |_| | | | | |\  |
+ |___/___/ |_| |_| \_|</div>
+      <div class="message ai"><span class="prefix">AI></span> 系统初始化完成。</div>
+      <div class="message ai"><span class="prefix">AI></span> 您好！我是终端 AI 助手。</div>
+      <div class="message ai"><span class="prefix">AI></span> 请输入您的指令_</div>
+    </div>
+    <div class="chat-input">
+      <span class="prompt">USER></span>
+      <input type="text" id="input" placeholder="输入命令..." onkeypress="if(event.key==='Enter')sendMessage()" autofocus>
+      <button onclick="sendMessage()">EXEC</button>
+    </div>
+  </div>
+  <script>
+    const responses = [
+      '> 处理中...<br>> 根据数据分析，我认为...<br>> 完成。',
+      '> 收到指令。<br>> 当然可以！让我为您处理。<br>> 完成。',
+      '> 正在计算...<br>> 有趣的问题！分析结果显示...<br>> 完成。',
+      '> 系统分析中...<br>> 让我为您详细解释。<br>> 完成。'
+    ];
+    function sendMessage() {
+      const input = document.getElementById('input');
+      const text = input.value.trim();
+      if (!text) return;
+      const messages = document.getElementById('messages');
+      messages.innerHTML += `<div class="message user"><span class="prefix">USER></span> ${text}</div>`;
+      input.value = '';
+      setTimeout(() => {
+        const reply = responses[Math.floor(Math.random() * responses.length)];
+        messages.innerHTML += `<div class="message ai"><span class="prefix">AI></span> ${reply}</div>`;
+        messages.scrollTop = messages.scrollHeight;
+      }, 800);
+      messages.scrollTop = messages.scrollHeight;
+    }
+  </script>
+</body>
+</html>

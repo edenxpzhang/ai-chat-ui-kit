@@ -1,0 +1,52 @@
+/**
+ * @generated-by AI: edenxpzhang
+ * @generated-date 2026-05-13
+ */
+
+import type { ThemeConfig } from '../types.js';
+import themeStyles from './theme.css?raw';
+
+export const terminalTheme: ThemeConfig = {
+  name: 'terminal',
+  variables: {
+    '--ai-primary': '#00ff00',
+    '--ai-primary-hover': '#00ff00',
+    '--ai-primary-active': '#00aa00',
+    '--ai-bg-primary': '#0a0a0a',
+    '--ai-bg-secondary': '#0c0c0c',
+    '--ai-bg-tertiary': '#0a0a0a',
+    '--ai-bg-chat': '#0a0a0a',
+    '--ai-text-primary': '#00ff00',
+    '--ai-text-secondary': '#00aa00',
+    '--ai-text-tertiary': '#008000',
+    '--ai-text-inverse': '#0a0a0a',
+    '--ai-message-user-bg': 'transparent',
+    '--ai-message-user-text': '#00ffff',
+    '--ai-message-ai-bg': 'transparent',
+    '--ai-message-ai-text': '#00ff00',
+    '--ai-message-border': '#00ff00',
+    '--ai-input-bg': 'transparent',
+    '--ai-input-border': '#00ff00',
+    '--ai-input-focus-border': '#00ff00',
+    '--ai-input-text': '#00ff00',
+    '--ai-input-placeholder': '#006600',
+    '--ai-tool-call-bg': '#0c0c0c',
+    '--ai-tool-call-border': '#00ff00',
+    '--ai-tool-call-success': '#00ff00',
+    '--ai-tool-call-error': '#ff0000',
+    '--ai-tool-call-running': '#ffff00',
+    '--ai-shadow-sm': '0 0 10px rgba(0, 255, 0, 0.2)',
+    '--ai-shadow-md': '0 0 20px rgba(0, 255, 0, 0.3)',
+    '--ai-shadow-lg': '0 0 30px rgba(0, 255, 0, 0.3), inset 0 0 30px rgba(0, 255, 0, 0.05)',
+    '--ai-radius-sm': '0px',
+    '--ai-radius-md': '0px',
+    '--ai-radius-lg': '8px',
+    '--ai-radius-xl': '8px',
+    '--ai-spacing-xs': '4px',
+    '--ai-spacing-sm': '8px',
+    '--ai-spacing-md': '12px',
+    '--ai-spacing-lg': '16px',
+    '--ai-spacing-xl': '24px',
+  },
+  styles: themeStyles,
+};

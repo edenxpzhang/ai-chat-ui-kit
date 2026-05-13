@@ -1,0 +1,86 @@
+<!--
+  @generated-by AI: edenxpzhang
+  @generated-date 2026-05-13
+
+  Theme Preview · Terminal —— 真实组件 DOM + terminal 主题
+-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>主题预览 · 04 Retro Terminal | AI Chat UI Kit</title>
+  <link rel="stylesheet" href="../packages/themes/src/terminal/theme.css" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      background: #0c0c0c;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 255, 0, 0.03) 0px,
+        rgba(0, 255, 0, 0.03) 1px,
+        transparent 1px,
+        transparent 2px
+      );
+      pointer-events: none;
+      z-index: 100;
+    }
+    .stage { width: 650px; height: 720px; }
+  </style>
+</head>
+<body data-theme="terminal">
+  <div class="stage">
+    <div class="ai-chat" data-theme="terminal">
+      <header class="ai-chat__header">
+        <div class="ai-chat__avatar">●</div>
+        <div class="ai-chat__title-group">
+          <h3 class="ai-chat__title">█ AI TERMINAL v2.0 █</h3>
+          <p class="ai-chat__subtitle">SYSTEM READY &gt;_</p>
+        </div>
+      </header>
+      <div class="ai-chat__messages">
+        <div class="ai-message ai-message--assistant">
+          <div class="ai-message__body">
+            <div class="ai-message__content">系统初始化完成。</div>
+          </div>
+        </div>
+        <div class="ai-message ai-message--assistant">
+          <div class="ai-message__body">
+            <div class="ai-message__content">您好！我是终端 AI 助手。</div>
+          </div>
+        </div>
+        <div class="ai-message ai-message--assistant">
+          <div class="ai-message__body">
+            <div class="ai-message__content">请输入您的指令_</div>
+          </div>
+        </div>
+        <div class="ai-message ai-message--user">
+          <div class="ai-message__body">
+            <div class="ai-message__content">help</div>
+          </div>
+        </div>
+        <div class="ai-message ai-message--assistant">
+          <div class="ai-message__body">
+            <div class="ai-message__content">可用命令: status / analyze / report / exit</div>
+          </div>
+        </div>
+      </div>
+      <div class="ai-input">
+        <div class="ai-input__wrapper">
+          <textarea class="ai-input__textarea" placeholder="输入命令..." rows="1"></textarea>
+          <button class="ai-input__send">EXEC</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

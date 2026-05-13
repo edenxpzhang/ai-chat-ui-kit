@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Style 6: Corporate Professional - AI Chat UI</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Microsoft YaHei', 'Segoe UI', sans-serif; background: #f0f2f5; height: 100vh; display: flex; justify-content: center; align-items: center; }
+    .chat-container { width: 480px; height: 720px; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: flex; flex-direction: column; border: 1px solid #e8e8e8; }
+    .chat-header { padding: 16px 24px; background: white; border-bottom: 3px solid #1890ff; display: flex; align-items: center; gap: 16px; }
+    .company-logo { width: 42px; height: 42px; background: #1890ff; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; font-weight: bold; }
+    .header-info h3 { font-size: 16px; font-weight: 600; color: #333; }
+    .header-info p { font-size: 12px; color: #999; }
+    .header-actions { margin-left: auto; display: flex; gap: 8px; }
+    .header-actions button { padding: 6px 12px; border: 1px solid #d9d9d9; background: white; border-radius: 4px; cursor: pointer; font-size: 12px; color: #666; transition: all 0.2s; }
+    .header-actions button:hover { border-color: #1890ff; color: #1890ff; }
+    .chat-messages { flex: 1; padding: 24px; overflow-y: auto; display: flex; flex-direction: column; gap: 20px; background: #fafafa; }
+    .chat-messages::-webkit-scrollbar { width: 6px; }
+    .chat-messages::-webkit-scrollbar-thumb { background: #d9d9d9; border-radius: 3px; }
+    .message { display: flex; gap: 12px; max-width: 85%; }
+    .message.user { flex-direction: row-reverse; align-self: flex-end; }
+    .message-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+    .message.ai .message-avatar { background: #1890ff; color: white; }
+    .message.user .message-avatar { background: #52c41a; color: white; }
+    .message-content { padding: 12px 16px; border-radius: 8px; font-size: 14px; line-height: 1.6; }
+    .message.ai .message-content { background: white; color: #333; border: 1px solid #e8e8e8; border-top-left-radius: 2px; }
+    .message.user .message-content { background: #1890ff; color: white; border-top-right-radius: 2px; }
+    .message-time { font-size: 11px; color: #999; margin-top: 4px; }
+    .message.user .message-time { text-align: right; }
+    .chat-input { padding: 16px 24px; background: white; border-top: 1px solid #e8e8e8; }
+    .input-wrapper { display: flex; gap: 12px; align-items: flex-end; }
+    .input-wrapper textarea { flex: 1; padding: 12px 16px; border: 1px solid #d9d9d9; border-radius: 6px; font-size: 14px; resize: none; outline: none; min-height: 44px; max-height: 120px; font-family: inherit; transition: all 0.2s; }
+    .input-wrapper textarea:focus { border-color: #1890ff; box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2); }
+    .input-wrapper button { padding: 12px 24px; background: #1890ff; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 500; transition: all 0.2s; white-space: nowrap; }
+    .input-wrapper button:hover { background: #40a9ff; }
+    .input-actions { display: flex; gap: 8px; margin-top: 8px; }
+    .input-actions span { font-size: 12px; color: #999; cursor: pointer; }
+    .input-actions span:hover { color: #1890ff; }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-header">
+      <div class="company-logo">AI</div>
+      <div class="header-info">
+        <h3>企业智能助手</h3>
+        <p>Enterprise AI Assistant v3.0</p>
+      </div>
+      <div class="header-actions">
+        <button>设置</button>
+        <button>历史</button>
+      </div>
+    </div>
+    <div class="chat-messages" id="messages">
+      <div class="message ai">
+        <div class="message-avatar">AI</div>
+        <div>
+          <div class="message-content">您好！我是企业智能助手。我可以帮助您处理文档、数据分析、日程安排等工作事务。有什么可以为您服务的吗？</div>
+          <div class="message-time">14:30</div>
+        </div>
+      </div>
+    </div>
+    <div class="chat-input">
+      <div class="input-wrapper">
+        <textarea id="input" rows="1" placeholder="输入您的问题..." onkeypress="if(event.key==='Enter' && !event.shiftKey){event.preventDefault();sendMessage()}"></textarea>
+        <button onclick="sendMessage()">发送</button>
+      </div>
+      <div class="input-actions">
+        <span>📎 上传文件</span>
+        <span>📊 数据分析</span>
+        <span>📅 日程管理</span>
+      </div>
+    </div>
+  </div>
+  <script>
+    const responses = [
+      '感谢您的提问。根据系统分析，我建议您...',
+      '好的，我已经为您处理了相关事务。如需进一步协助，请随时告知。',
+      '这是一个专业的问题。从行业最佳实践来看...',
+      '我已经为您生成了详细的分析报告，主要包括以下几个方面...',
+      '收到您的指令。正在为您查询相关数据，请稍候...'
+    ];
+    function sendMessage() {
+      const input = document.getElementById('input');
+      const text = input.value.trim();
+      if (!text) return;
+      const messages = document.getElementById('messages');
+      const time = new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
+      messages.innerHTML += `
+        <div class="message user">
+          <div class="message-avatar">我</div>
+          <div>
+            <div class="message-content">${text}</div>
+            <div class="message-time">${time}</div>
+          </div>
+        </div>`;
+      input.value = '';
+      setTimeout(() => {
+        const reply = responses[Math.floor(Math.random() * responses.length)];
+        messages.innerHTML += `
+          <div class="message ai">
+            <div class="message-avatar">AI</div>
+            <div>
+              <div class="message-content">${reply}</div>
+              <div class="message-time">${new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })}</div>
+            </div>
+          </div>`;
+        messages.scrollTop = messages.scrollHeight;
+      }, 1000);
+      messages.scrollTop = messages.scrollHeight;
+    }
+  </script>
+</body>
+</html>

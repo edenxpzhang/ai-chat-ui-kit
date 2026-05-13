@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Style 3: Glassmorphism - AI Chat UI</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; height: 100vh; display: flex; justify-content: center; align-items: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); position: relative; overflow: hidden; }
+    body::before { content: ''; position: absolute; width: 400px; height: 400px; background: rgba(255, 255, 255, 0.3); border-radius: 50%; top: -100px; left: -100px; filter: blur(60px); }
+    body::after { content: ''; position: absolute; width: 350px; height: 350px; background: rgba(255, 200, 200, 0.3); border-radius: 50%; bottom: -80px; right: -80px; filter: blur(60px); }
+    .chat-container { width: 420px; height: 700px; background: rgba(255, 255, 255, 0.25); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-radius: 24px; border: 1px solid rgba(255, 255, 255, 0.5); display: flex; flex-direction: column; position: relative; z-index: 1; box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37); }
+    .chat-header { padding: 24px; background: rgba(255, 255, 255, 0.3); border-bottom: 1px solid rgba(255, 255, 255, 0.5); display: flex; align-items: center; gap: 14px; border-radius: 24px 24px 0 0; }
+    .chat-header h3 { font-size: 18px; font-weight: 600; color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .chat-header p { font-size: 13px; color: rgba(255, 255, 255, 0.8); }
+    .avatar { width: 45px; height: 45px; background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(10px); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; border: 2px solid rgba(255, 255, 255, 0.6); }
+    .chat-messages { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; }
+    .chat-messages::-webkit-scrollbar { width: 6px; }
+    .chat-messages::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.5); border-radius: 3px; }
+    .message { max-width: 78%; padding: 14px 18px; border-radius: 20px; font-size: 14px; line-height: 1.6; backdrop-filter: blur(10px); }
+    .message.user { align-self: flex-end; background: rgba(102, 126, 234, 0.6); color: white; border: 1px solid rgba(255, 255, 255, 0.4); border-bottom-right-radius: 8px; }
+    .message.ai { align-self: flex-start; background: rgba(255, 255, 255, 0.4); color: #333; border: 1px solid rgba(255, 255, 255, 0.6); border-bottom-left-radius: 8px; }
+    .chat-input { padding: 16px 20px; background: rgba(255, 255, 255, 0.3); border-top: 1px solid rgba(255, 255, 255, 0.5); display: flex; gap: 12px; border-radius: 0 0 24px 24px; }
+    .chat-input input { flex: 1; padding: 12px 18px; background: rgba(255, 255, 255, 0.3); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.5); border-radius: 20px; color: white; font-size: 14px; outline: none; }
+    .chat-input input::placeholder { color: rgba(255, 255, 255, 0.7); }
+    .chat-input input:focus { background: rgba(255, 255, 255, 0.4); border-color: rgba(255, 255, 255, 0.8); }
+    .chat-input button { width: 44px; height: 44px; background: rgba(102, 126, 234, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.5); color: white; border-radius: 50%; cursor: pointer; font-size: 18px; transition: all 0.3s; }
+    .chat-input button:hover { background: rgba(102, 126, 234, 0.8); transform: scale(1.05); }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-header">
+      <div class="avatar">✨</div>
+      <div>
+        <h3>Glass AI</h3>
+        <p>透明 · 优雅 · 智能</p>
+      </div>
+    </div>
+    <div class="chat-messages" id="messages">
+      <div class="message ai">您好！我是 Glass AI，采用最新的毛玻璃设计风格。有什么可以帮您的吗？✨</div>
+    </div>
+    <div class="chat-input">
+      <input type="text" id="input" placeholder="输入消息..." onkeypress="if(event.key==='Enter')sendMessage()">
+      <button onclick="sendMessage()">➤</button>
+    </div>
+  </div>
+  <script>
+    const responses = [
+      '这是一个很好的问题！让我为您详细解答。',
+      '当然可以！我很乐意帮助您解决这个问题。',
+      '有趣的观点！让我从多个角度为您分析。',
+      '感谢您的提问！根据我的分析...',
+      '好的，让我为您处理这个请求。'
+    ];
+    function sendMessage() {
+      const input = document.getElementById('input');
+      const text = input.value.trim();
+      if (!text) return;
+      const messages = document.getElementById('messages');
+      messages.innerHTML += `<div class="message user">${text}</div>`;
+      input.value = '';
+      setTimeout(() => {
+        const reply = responses[Math.floor(Math.random() * responses.length)];
+        messages.innerHTML += `<div class="message ai">${reply}</div>`;
+        messages.scrollTop = messages.scrollHeight;
+      }, 800);
+      messages.scrollTop = messages.scrollHeight;
+    }
+  </script>
+</body>
+</html>

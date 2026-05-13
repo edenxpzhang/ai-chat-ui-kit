@@ -1,0 +1,79 @@
+<!--
+  @generated-by AI: edenxpzhang
+  @generated-date 2026-05-13
+
+  Theme Preview · Gradient —— 真实组件 DOM + gradient 主题
+-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>主题预览 · 05 Gradient Bubbles | AI Chat UI Kit</title>
+  <link rel="stylesheet" href="../packages/themes/src/gradient/theme.css" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: linear-gradient(
+        135deg,
+        #f093fb 0%,
+        #f5576c 25%,
+        #4facfe 50%,
+        #00f2fe 75%,
+        #43e97b 100%
+      );
+      background-size: 400% 400%;
+      animation: ai-gradient-shift 15s ease infinite;
+    }
+    @keyframes ai-gradient-shift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .stage { width: 420px; height: 720px; }
+  </style>
+</head>
+<body data-theme="gradient">
+  <div class="stage">
+    <div class="ai-chat" data-theme="gradient">
+      <header class="ai-chat__header">
+        <div class="ai-chat__title-group">
+          <h3 class="ai-chat__title">✨ Gradient AI</h3>
+          <p class="ai-chat__subtitle">多彩 · 活力 · 智能</p>
+        </div>
+      </header>
+      <div class="ai-chat__messages">
+        <div class="ai-message ai-message--assistant">
+          <div class="ai-message__body">
+            <div class="ai-message__content">嗨！我是 Gradient AI 🌈<br />采用最新的渐变色设计，让聊天更有趣！</div>
+            <div class="ai-message__time">14:30</div>
+          </div>
+        </div>
+        <div class="ai-message ai-message--user">
+          <div class="ai-message__body">
+            <div class="ai-message__content">真好看 🎨</div>
+            <div class="ai-message__time">14:30</div>
+          </div>
+        </div>
+        <div class="ai-message ai-message--assistant">
+          <div class="ai-message__body">
+            <div class="ai-message__content">太棒了！🌟 让我来帮您...</div>
+            <div class="ai-message__time">14:31</div>
+          </div>
+        </div>
+      </div>
+      <div class="ai-input">
+        <div class="ai-input__wrapper">
+          <textarea class="ai-input__textarea" placeholder="说点什么..." rows="1"></textarea>
+          <button class="ai-input__send">➤</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
