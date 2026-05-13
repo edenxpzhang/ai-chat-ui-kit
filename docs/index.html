@@ -34,36 +34,38 @@
     }
     .theme-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0,0,0,0.15); }
     .compare-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
       border-bottom: 1px solid #f0f0f0;
+      height: 360px;
+      overflow: hidden;
+      position: relative;
     }
     .compare-cell {
-      height: 360px;
+      width: 100%;
+      height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
       position: relative;
     }
-    .compare-cell + .compare-cell { border-left: 1px solid #f0f0f0; }
     .compare-cell iframe {
       border: none;
-      transform-origin: top center;
       pointer-events: none;
     }
     .compare-cell .label {
       position: absolute;
       top: 8px; left: 8px;
       padding: 3px 8px;
-      background: rgba(0,0,0,0.55);
+      background: #0071e3;
       color: #fff;
       font-size: 11px;
       border-radius: 6px;
       letter-spacing: 0.5px;
       z-index: 2;
     }
-    .compare-cell.real .label { background: #0071e3; }
     .theme-info {
       padding: 18px 22px;
       display: flex;
@@ -105,19 +107,15 @@
 <body>
   <div class="header">
     <h1>🎨 AI Chat UI Kit</h1>
-    <p>6 套精心设计的聊天界面主题。每一行展示「设计稿 demo」与「真实组件 + 主题渲染」的并排对比，确认两者视觉一致。</p>
+    <p>6 套精心设计的聊天界面主题。以下展示真实组件在各主题下的渲染效果。</p>
     <span class="badge">基于 Web Components · 兼容 React / Vue / 原生 HTML</span>
   </div>
 
   <div class="theme-grid">
     <!-- 01 Minimal -->
     <div class="theme-card">
-      <div class="compare-row">
-        <div class="compare-cell" style="background: #f5f5f7;">
-          <span class="label">设计稿</span>
-          <iframe src="chat-style-1-minimal.html" style="width: 400px; height: 700px; transform: scale(0.5);"></iframe>
-        </div>
-        <div class="compare-cell real" style="background: #f5f5f7;">
+      <div class="compare-row" style="background: #f5f5f7;">
+        <div class="compare-cell">
           <span class="label">真实组件 + 主题</span>
           <iframe src="theme-preview-1-minimal.html" style="width: 400px; height: 700px; transform: scale(0.5);"></iframe>
         </div>
@@ -127,7 +125,6 @@
         <p>极简苹果风，圆角气泡 + 蓝白配色，适合移动端和桌面端通用场景。</p>
         <span class="theme-tag" style="background: #e8f2ff; color: #0071e3;">Apple Style</span>
         <div class="actions">
-          <a href="chat-style-1-minimal.html" target="_blank">设计稿</a>
           <a class="primary" href="theme-preview-1-minimal.html" target="_blank">主题预览</a>
         </div>
       </div>
@@ -135,14 +132,10 @@
 
     <!-- 02 Neon -->
     <div class="theme-card">
-      <div class="compare-row">
-        <div class="compare-cell" style="background: #0a0a0a;">
-          <span class="label">设计稿</span>
-          <iframe src="chat-style-2-neon.html" style="width: 450px; height: 700px; transform: scale(0.45);"></iframe>
-        </div>
-        <div class="compare-cell real" style="background: #0a0a0a;">
+      <div class="compare-row" style="background: #0a0a0a;">
+        <div class="compare-cell">
           <span class="label">真实组件 + 主题</span>
-          <iframe src="theme-preview-2-neon.html" style="width: 450px; height: 700px; transform: scale(0.45);"></iframe>
+          <iframe src="theme-preview-2-neon.html" style="width: 400px; height: 700px; transform: scale(0.5);"></iframe>
         </div>
       </div>
       <div class="theme-info">
@@ -150,7 +143,6 @@
         <p>赛博朋克深色主题，霓虹发光效果，适合科技感强的 AI 产品。</p>
         <span class="theme-tag" style="background: #1a1a2e; color: #00ffff;">Cyberpunk</span>
         <div class="actions">
-          <a href="chat-style-2-neon.html" target="_blank">设计稿</a>
           <a class="primary" href="theme-preview-2-neon.html" target="_blank">主题预览</a>
         </div>
       </div>
@@ -158,14 +150,10 @@
 
     <!-- 03 Glass -->
     <div class="theme-card">
-      <div class="compare-row">
-        <div class="compare-cell" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-          <span class="label">设计稿</span>
-          <iframe src="chat-style-3-glass.html" style="width: 420px; height: 700px; transform: scale(0.48);"></iframe>
-        </div>
-        <div class="compare-cell real" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+      <div class="compare-row" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <div class="compare-cell">
           <span class="label">真实组件 + 主题</span>
-          <iframe src="theme-preview-3-glass.html" style="width: 420px; height: 700px; transform: scale(0.48);"></iframe>
+          <iframe src="theme-preview-3-glass.html" style="width: 400px; height: 700px; transform: scale(0.5);"></iframe>
         </div>
       </div>
       <div class="theme-info">
@@ -173,7 +161,6 @@
         <p>毛玻璃拟态风格，半透明模糊效果，适合现代化 SaaS 产品。</p>
         <span class="theme-tag" style="background: rgba(102,126,234,0.15); color: #667eea;">Glass</span>
         <div class="actions">
-          <a href="chat-style-3-glass.html" target="_blank">设计稿</a>
           <a class="primary" href="theme-preview-3-glass.html" target="_blank">主题预览</a>
         </div>
       </div>
@@ -181,14 +168,10 @@
 
     <!-- 04 Terminal -->
     <div class="theme-card">
-      <div class="compare-row">
-        <div class="compare-cell" style="background: #0a0a0a;">
-          <span class="label">设计稿</span>
-          <iframe src="chat-style-4-terminal.html" style="width: 650px; height: 720px; transform: scale(0.32);"></iframe>
-        </div>
-        <div class="compare-cell real" style="background: #0a0a0a;">
+      <div class="compare-row" style="background: #0a0a0a;">
+        <div class="compare-cell">
           <span class="label">真实组件 + 主题</span>
-          <iframe src="theme-preview-4-terminal.html" style="width: 650px; height: 720px; transform: scale(0.32);"></iframe>
+          <iframe src="theme-preview-4-terminal.html" style="width: 400px; height: 700px; transform: scale(0.5);"></iframe>
         </div>
       </div>
       <div class="theme-info">
@@ -196,7 +179,6 @@
         <p>复古终端风格，绿色配色 + 扫描线效果，适合开发者工具 / CLI 产品。</p>
         <span class="theme-tag" style="background: #e8fff0; color: #00aa00;">Terminal</span>
         <div class="actions">
-          <a href="chat-style-4-terminal.html" target="_blank">设计稿</a>
           <a class="primary" href="theme-preview-4-terminal.html" target="_blank">主题预览</a>
         </div>
       </div>
@@ -204,14 +186,10 @@
 
     <!-- 05 Gradient -->
     <div class="theme-card">
-      <div class="compare-row">
-        <div class="compare-cell" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 25%, #4facfe 50%, #00f2fe 75%, #43e97b 100%); background-size: 400% 400%;">
-          <span class="label">设计稿</span>
-          <iframe src="chat-style-5-gradient.html" style="width: 420px; height: 720px; transform: scale(0.48);"></iframe>
-        </div>
-        <div class="compare-cell real" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 25%, #4facfe 50%, #00f2fe 75%, #43e97b 100%); background-size: 400% 400%;">
+      <div class="compare-row" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 25%, #4facfe 50%, #00f2fe 75%, #43e97b 100%); background-size: 400% 400%;">
+        <div class="compare-cell">
           <span class="label">真实组件 + 主题</span>
-          <iframe src="theme-preview-5-gradient.html" style="width: 420px; height: 720px; transform: scale(0.48);"></iframe>
+          <iframe src="theme-preview-5-gradient.html" style="width: 400px; height: 700px; transform: scale(0.5);"></iframe>
         </div>
       </div>
       <div class="theme-info">
@@ -219,7 +197,6 @@
         <p>多彩渐变气泡，弹出动画 + emoji，适合年轻化 / 社交类产品。</p>
         <span class="theme-tag" style="background: linear-gradient(135deg,#f093fb,#f5576c); color: white;">Gradient</span>
         <div class="actions">
-          <a href="chat-style-5-gradient.html" target="_blank">设计稿</a>
           <a class="primary" href="theme-preview-5-gradient.html" target="_blank">主题预览</a>
         </div>
       </div>
@@ -227,14 +204,10 @@
 
     <!-- 06 Corporate -->
     <div class="theme-card">
-      <div class="compare-row">
-        <div class="compare-cell" style="background: #f0f2f5;">
-          <span class="label">设计稿</span>
-          <iframe src="chat-style-6-corporate.html" style="width: 480px; height: 720px; transform: scale(0.42);"></iframe>
-        </div>
-        <div class="compare-cell real" style="background: #f0f2f5;">
+      <div class="compare-row" style="background: #f0f2f5;">
+        <div class="compare-cell">
           <span class="label">真实组件 + 主题</span>
-          <iframe src="theme-preview-6-corporate.html" style="width: 480px; height: 720px; transform: scale(0.42);"></iframe>
+          <iframe src="theme-preview-6-corporate.html" style="width: 400px; height: 700px; transform: scale(0.5);"></iframe>
         </div>
       </div>
       <div class="theme-info">
@@ -242,7 +215,6 @@
         <p>企业商务风格，蓝色主题 + 头像时间戳，适合 B 端 / 企业级应用。</p>
         <span class="theme-tag" style="background: #e6f7ff; color: #1890ff;">Enterprise</span>
         <div class="actions">
-          <a href="chat-style-6-corporate.html" target="_blank">设计稿</a>
           <a class="primary" href="theme-preview-6-corporate.html" target="_blank">主题预览</a>
         </div>
       </div>
