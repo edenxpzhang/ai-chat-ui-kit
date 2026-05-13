@@ -2,14 +2,18 @@
   "name": "@ai-chat/themes",
   "version": "0.1.0",
   "description": "Theme packages for AI Chat UI Kit",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.mts",
   "exports": {
-    ".": "./src/index.ts",
-    "./default": "./src/default/index.ts",
-    "./bubble": "./src/bubble/index.ts",
-    "./flat": "./src/flat/index.ts"
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.mts"
+    },
+    "./package.json": "./package.json"
   },
-  "files": ["src"],
+  "files": ["dist"],
   "scripts": {
     "dev": "tsup --watch",
     "build": "tsup"
