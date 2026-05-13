@@ -43,17 +43,17 @@
 
 ### 使用 PNPM（推荐）
 ```bash
-pnpm add @ai-chat/core @ai-chat/components @ai-chat/themes
+pnpm add @ai-chat-ui-kit/core @ai-chat-ui-kit/components @ai-chat-ui-kit/themes
 ```
 
 ### 使用 NPM
 ```bash
-npm install @ai-chat/core @ai-chat/components @ai-chat/themes
+npm install @ai-chat-ui-kit/core @ai-chat-ui-kit/components @ai-chat-ui-kit/themes
 ```
 
 ### 使用 Yarn
 ```bash
-yarn add @ai-chat/core @ai-chat/components @ai-chat/themes
+yarn add @ai-chat-ui-kit/core @ai-chat-ui-kit/components @ai-chat-ui-kit/themes
 ```
 
 ## 🚀 快速开始

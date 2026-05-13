@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build:core": "pnpm --filter @ai-chat/core run build",
-    "build:components": "pnpm --filter @ai-chat/components run build",
-    "build:themes": "pnpm --filter @ai-chat/themes run build",
+    "build:core": "pnpm --filter @ai-chat-ui-kit/core run build",
+    "build:components": "pnpm --filter @ai-chat-ui-kit/components run build",
+    "build:themes": "pnpm --filter @ai-chat-ui-kit/themes run build",
     "build": "pnpm run build:core && pnpm run build:components && pnpm run build:themes",
     "test": "vitest run",
     "test:watch": "vitest",

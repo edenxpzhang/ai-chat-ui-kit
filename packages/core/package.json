@@ -1,5 +1,5 @@
 {
-  "name": "@ai-chat/core",
+  "name": "@ai-chat-ui-kit/core",
   "version": "0.1.0",
   "description": "Core logic layer for AI Chat UI Kit (Headless)",
   "type": "module",

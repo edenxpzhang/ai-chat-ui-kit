@@ -1,5 +1,5 @@
 {
-  "name": "@ai-chat/components",
+  "name": "@ai-chat-ui-kit/components",
   "version": "0.1.0",
   "description": "Web Components for AI Chat UI Kit (Lit)",
   "type": "module",
