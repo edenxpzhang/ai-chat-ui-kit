@@ -159,25 +159,24 @@ onMounted(() => {
 ## 🎨 主题切换
 
 ```tsx
-// 使用默认主题
-import '@ai-chat/themes/default';
-
-// 使用气泡主题（仿微信/QQ 风格）
-import '@ai-chat/themes/bubble';
-
-// 使用扁平主题
-import '@ai-chat/themes/flat';
+// 导入主题样式
+import '@ai-chat/themes/minimal';  // 极简苹果风
+import '@ai-chat/themes/neon';     // 赛博朋克深色
+import '@ai-chat/themes/glass';    // 毛玻璃拟态
+import '@ai-chat/themes/terminal'; // 复古终端
+import '@ai-chat/themes/gradient'; // 多彩渐变
+import '@ai-chat/themes/corporate'; // 企业商务
 
 // 运行时动态切换主题
 import { applyTheme } from '@ai-chat/themes';
-import { defaultTheme } from '@ai-chat/themes/default';
-import { bubbleTheme } from '@ai-chat/themes/bubble';
+import { minimalTheme } from '@ai-chat/themes/minimal';
+import { neonTheme } from '@ai-chat/themes/neon';
 
-// 应用默认主题
-applyTheme(defaultTheme);
+// 应用极简主题
+applyTheme(minimalTheme);
 
-// 切换到气泡主题
-applyTheme(bubbleTheme);
+// 切换到赛博朋克主题
+applyTheme(neonTheme);
 ```
 
 ## 📖 文档
