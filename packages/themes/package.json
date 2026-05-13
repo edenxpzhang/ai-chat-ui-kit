@@ -22,7 +22,10 @@
     },
     "./package.json": "./package.json"
   },
-  "files": ["dist"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "dev": "tsup --watch",
     "build": "tsup"

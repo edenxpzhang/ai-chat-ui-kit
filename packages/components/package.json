@@ -15,7 +15,10 @@
   "bugs": {
     "url": "https://github.com/edenxpzhang/ai-chat-ui-kit/issues"
   },
-  "files": ["dist"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "dev": "tsup --watch",
     "build": "tsup"
