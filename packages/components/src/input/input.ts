@@ -5,7 +5,11 @@
 
 import { LitElement, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import './input.css';
+import inputCss from './input.css';
+import { injectStyle } from '../utils/style-injector.js';
+
+// light DOM 样式注入
+injectStyle('ai-input', inputCss as unknown as string);
 
 @customElement('ai-input')
 export class AiInput extends LitElement {

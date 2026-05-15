@@ -6,10 +6,15 @@
 
 import { LitElement, html, PropertyValues } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import './chat.css';
+import chatCss from './chat.css';
+import { injectStyle } from '../utils/style-injector.js';
 
 // 导入共享类型
 import { Message, ModelConfig } from '../types.js';
+
+// light DOM 组件无法使用 Lit static styles，
+// 这里在模块加载时将样式幂等注入 <head>，免去宿主项目手动 import dist/index.css 的麻烦。
+injectStyle('ai-chat', chatCss as unknown as string);
 
 @customElement('ai-chat')
 export class AiChat extends LitElement {

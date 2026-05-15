@@ -5,10 +5,14 @@
 
 import { LitElement, html, css } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import './tool-call.css';
+import toolCallCss from './tool-call.css';
+import { injectStyle } from '../utils/style-injector.js';
 
 // 导入共享类型
 import { ToolCall } from '../types.js';
+
+// light DOM 样式注入
+injectStyle('ai-tool-call', toolCallCss as unknown as string);
 
 @customElement('ai-tool-call')
 export class AiToolCall extends LitElement {
