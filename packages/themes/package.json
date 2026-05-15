@@ -1,6 +1,6 @@
 {
   "name": "@ai-chat-ui-kit/themes",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Theme packages for AI Chat UI Kit",
   "main": "dist/index.js",
   "repository": {
