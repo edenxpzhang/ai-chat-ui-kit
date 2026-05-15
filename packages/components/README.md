@@ -350,6 +350,13 @@ applyTheme('glass', shadow.host as HTMLElement); // 仍走 light DOM API
 
 ## 📜 Changelog
 
+### 0.2.2 (2026-05-15)
+
+- 🔴 **关键修复**：`tsconfig.json` 中 `useDefineForClassFields: true` 与 Lit `@property` 装饰器冲突，导致编译后 class fields 用 `Object.defineProperty` 覆盖了装饰器注册的 getter/setter；受控模式下 `el.messages = [...]` 不触发重渲染
+- ✅ 修复：将 `packages/components/tsconfig.json` 的 `useDefineForClassFields` 改为 `false`，一行修复 11 个属性
+- 影响范围：所有使用受控模式 / property binding 的场景；浏览器控制台不再抛 `class-field-shadowing` 错误
+- 参考：https://lit.dev/msg/class-field-shadowing
+
 ### 0.2.1 (2026-05-15)
 
 - 🔴 修复 `package.json#exports` 缺少 css 导出（导致 Vite/Node 严格模式下 `import '@ai-chat-ui-kit/components/dist/index.css'` 失败）

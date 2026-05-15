@@ -8,7 +8,7 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "useDefineForClassFields": true,
+    "useDefineForClassFields": false,
     "experimentalDecorators": true,
     "declaration": true,
     "declarationMap": true,
