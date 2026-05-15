@@ -47,13 +47,23 @@ ai-input .ai-input__textarea {
   caret-color: var(--ai-input-textarea-caret, #1677ff);
   box-sizing: border-box;
   transition: border-color 0.2s, box-shadow 0.2s;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+ai-input .ai-input__textarea::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
 }
 
 ai-input .ai-input__textarea::placeholder {
   color: var(--ai-input-textarea-placeholder, rgba(0, 0, 0, 0.35));
 }
 
-ai-input .ai-input__textarea:focus {
+ai-input .ai-input__textarea:focus,
+ai-input .ai-input__textarea:focus-visible {
+  outline: none;
   border-color: var(--ai-input-textarea-border-focus, #1677ff);
   box-shadow: var(--ai-input-textarea-shadow-focus, 0 0 0 2px rgba(22, 119, 255, 0.1));
 }
