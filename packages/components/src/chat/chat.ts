@@ -32,8 +32,16 @@ export class AiChat extends LitElement {
    *
    * - controlled = true 时：作为唯一数据源
    * - controlled = false 时：作为初始值（仅 attributeChangedCallback 首次同步）
+   *
+   * 自定义 hasChanged：除引用变更外，长度变化也视为变更，
+   * 避免宿主在原地 push 后忘记换引用导致不重渲染的低级错误。
+   * 推荐宿主仍以"传入新引用"的方式更新（[...arr, newOne]）。
    */
-  @property({ attribute: false })
+  @property({
+    attribute: false,
+    hasChanged: (n: Message[] | undefined, o: Message[] | undefined) =>
+      n !== o || (n?.length ?? 0) !== (o?.length ?? 0),
+  })
   messages: Message[] = [];
 
   @property({ type: String })
@@ -50,6 +58,19 @@ export class AiChat extends LitElement {
 
   @property({ type: Boolean, attribute: 'hide-header' })
   hideHeader = false;
+
+  /**
+   * 透传给内部 `<ai-input>` 的 placeholder 文案
+   * （便于宿主本地化 / 替换提示语而无需 hack DOM）
+   */
+  @property({ type: String, attribute: 'input-placeholder' })
+  inputPlaceholder = '输入消息...';
+
+  /**
+   * 透传给内部 `<ai-input>` 的发送按钮文案
+   */
+  @property({ type: String, attribute: 'send-text' })
+  sendText = '发送';
 
   @property({ type: Object })
   config?: ModelConfig;
@@ -78,6 +99,19 @@ export class AiChat extends LitElement {
     if (changedProperties.has('theme')) {
       this.applyThemeAttr();
     }
+  }
+
+  /**
+   * Lit 首次渲染完成后派发 `ai-chat-ready`，
+   * 宿主可在该事件后再写入 `.messages`，避免 SSR / 懒挂载场景的赋值竞态。
+   */
+  firstUpdated() {
+    this.dispatchEvent(
+      new CustomEvent('ai-chat-ready', {
+        bubbles: true,
+        composed: true,
+      })
+    );
   }
 
   private applyThemeAttr() {
@@ -129,12 +163,16 @@ export class AiChat extends LitElement {
             : ''}
         </div>
 
-        <ai-input
-          .disabled=${this.isLoading}
-          ?headless=${this.headless}
-          @send=${this.handleSend}
-          @input-change=${this.handleInputChange}
-        ></ai-input>
+        <slot name="input">
+          <ai-input
+            .disabled=${this.isLoading}
+            ?headless=${this.headless}
+            .placeholder=${this.inputPlaceholder}
+            .sendText=${this.sendText}
+            @send=${this.handleSend}
+            @input-change=${this.handleInputChange}
+          ></ai-input>
+        </slot>
 
         <slot name="footer"></slot>
       </div>

@@ -1,6 +1,6 @@
 {
   "name": "@ai-chat-ui-kit/components",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Web Components for AI Chat UI Kit (Lit)",
   "type": "module",
   "main": "dist/index.cjs",

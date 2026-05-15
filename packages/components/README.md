@@ -184,6 +184,8 @@ function handleSend(e: CustomEvent) { /* ... */ }
 | `header-subtitle` | `string` | `'在线 · 随时为您服务'` | 副标题 |
 | `header-avatar` | `string` | `'🤖'` | 头像 emoji / 字符 |
 | `hide-header` | `boolean` | `false` | 是否隐藏 header |
+| `input-placeholder` | `string` | `'输入消息...'` | 透传给内部 `<ai-input>` 的占位符（v0.2.3+） |
+| `send-text` | `string` | `'发送'` | 透传给内部 `<ai-input>` 的发送按钮文案（v0.2.3+） |
 
 **Events:**
 
@@ -191,6 +193,7 @@ function handleSend(e: CustomEvent) { /* ... */ }
 | --- | --- | --- |
 | `ai-chat-send` | `{ content, id }` | 用户提交输入时派发（始终触发） |
 | `ai-chat-action` | `{ actionId, messageId, payload }` | 子消息中带 `data-action` 的元素被点击时派发 |
+| `ai-chat-ready` | `void` | 组件首次渲染完成时派发（v0.2.3+），可在该事件后再写入 `.messages` 以避免 SSR / 懒挂载场景的赋值竞态 |
 | `message-sent` | `{ message }` | 非受控模式：用户消息追加后派发 |
 | `message-received` | `{ message }` | 非受控模式：模拟 AI 回复后派发 |
 | `input-change` | `{ value }` | 输入框内容变化 |
@@ -210,7 +213,10 @@ function handleSend(e: CustomEvent) { /* ... */ }
 - `header` 整体替换 header
 - `header-actions` header 右侧操作区
 - `empty` 空态自定义内容
+- `input` 替换内部输入区（v0.2.3+），用于宿主接入上传 / 录音 / @提及等扩展输入控件
 - `footer` 输入框下方追加内容
+
+> **布局约束**：`<ai-chat>` 的父容器必须具有确定的高度（`height` 或 `display:flex; min-height:0` 的 flex 基线），否则 `.ai-chat__messages` 的 `flex:1` 拿不到剩余空间，输入框将无法沉底。在受限宽度的 flex 容器（如 antd `Drawer` / 侧边栏）内，输入区 / 输入框已内置 `flex-shrink:0` + `min-width:0` 兜底（v0.2.3+）。
 
 ### `<ai-message>` — 消息组件
 
@@ -245,6 +251,15 @@ function handleSend(e: CustomEvent) { /* ... */ }
 **Events:**
 - `send: { content }`
 - `input-change: { value }`
+
+**CSS 变量（v0.2.3+，禁用态主题化）:**
+
+| 变量 | 默认值 | 说明 |
+| --- | --- | --- |
+| `--ai-input-send-bg` | `#1677ff` | 发送按钮启用态背景色 |
+| `--ai-input-send-color` | `#fff` | 发送按钮启用态文字色 |
+| `--ai-input-send-bg-disabled` | `#d9d9d9` | 发送按钮禁用态背景色 |
+| `--ai-input-send-color-disabled` | `rgba(0, 0, 0, 0.25)` | 发送按钮禁用态文字色 |
 
 ### `<ai-markdown>` — Markdown 渲染（v0.2 增强）
 
@@ -306,6 +321,85 @@ import '@ai-chat-ui-kit/components/react';
 
 任意一种方式后，`<ai-chat>` `<ai-message>` 等标签即可直接在 JSX 中使用，类型完整。
 
+### React 集成常见坑（必读）
+
+`<ai-chat>` 是 LitElement Web Component，与 React 集成时有几个一定要避开的细节：
+
+1. **布尔属性**（`controlled` / `hide-header`）必须裸名书写或写 `=""`，**不能驼峰**：
+
+   ```tsx
+   // ✅ OK
+   <ai-chat controlled hide-header />
+   <ai-chat controlled="" hide-header="" />
+
+   // ❌ NO（不会被识别为 attribute）
+   <ai-chat hideHeader />
+   ```
+
+2. **复杂属性 `messages` 必须通过 `ref` 用 property 赋值**，因为它是 Lit `@property({ attribute: false })`：
+
+   ```tsx
+   const chatRef = useRef<HTMLElement>(null);
+
+   useEffect(() => {
+     if (chatRef.current) {
+       (chatRef.current as any).messages = messages;
+     }
+   }, [messages]);
+
+   return <ai-chat ref={chatRef} controlled />;
+   ```
+
+   或者使用 `@ai-chat-ui-kit/components/react` 提供的 JSX 类型后直接用 `messages={messages}`，由内部统一处理为 property。
+
+3. **自定义事件需要 `addEventListener`**（React 不支持 kebab-case 事件 prop）：
+
+   ```tsx
+   useEffect(() => {
+     const el = chatRef.current;
+     if (!el) return;
+     const onSend = (e: Event) => handleSend(e as CustomEvent);
+     const onAction = (e: Event) => handleAction(e as CustomEvent);
+     el.addEventListener('ai-chat-send', onSend);
+     el.addEventListener('ai-chat-action', onAction);
+     return () => {
+       el.removeEventListener('ai-chat-send', onSend);
+       el.removeEventListener('ai-chat-action', onAction);
+     };
+   }, []);
+   ```
+
+   引入 `@ai-chat-ui-kit/components/react` 后亦支持 `onAiChatSend` / `onAiChatAction` 形式（已在 JSX 类型中声明）。
+
+4. **`React.StrictMode` 双触发去重**：开发期 `useEffect` 会执行两次，若你在 effect 中向 `<ai-chat>` 推消息，应使用消息 `id` 做幂等检查，避免重复追加：
+
+   ```tsx
+   const seenIds = useRef(new Set<string>());
+   const append = (msg: Message) => {
+     if (seenIds.current.has(msg.id)) return;
+     seenIds.current.add(msg.id);
+     setMessages(prev => [...prev, msg]);
+   };
+   ```
+
+5. **首屏赋值时机**（v0.2.3+）：在 `Drawer destroyOnClose=false` / 懒挂载 / HMR 等场景下，建议监听 `ai-chat-ready` 后再做首次 `messages` 赋值：
+
+   ```tsx
+   useEffect(() => {
+     const el = chatRef.current;
+     if (!el) return;
+     const onReady = () => {
+       (el as any).messages = initialMessages;
+     };
+     el.addEventListener('ai-chat-ready', onReady);
+     return () => el.removeEventListener('ai-chat-ready', onReady);
+   }, []);
+   ```
+
+6. **`messages` 始终传新引用**：受控模式下请使用 `[...messages, newOne]` 或 `messages.concat(newOne)`，**不要原地 `arr.push()`**。组件内部已在 `hasChanged` 中加了长度比对兜底，但仍建议遵循"新引用"惯例以兼容更深的引用相等比较场景。
+
+
+
 ## 🎨 配合 Themes 使用
 
 ```ts
@@ -349,6 +443,26 @@ applyTheme('glass', shadow.host as HTMLElement); // 仍走 light DOM API
 
 
 ## 📜 Changelog
+
+### 0.2.3 (2026-05-15)
+
+集中修复在受控（HITL）模式 + 受限宽/高容器场景下的若干问题：
+
+- 🔴 **P0** 修复 `<ai-input>` 在受限宽度 flex 容器（antd `Drawer` / 侧边栏 / 网格分栏）中被压扁、按钮飞出
+  - `ai-input` 增加 `width:100%` / `flex-shrink:0` / `box-sizing:border-box`
+  - `.ai-input__wrapper` / `.ai-input` 显式 `width:100%`
+  - `.ai-input__textarea` 增加 `min-width:0`，修掉 flex 经典坑（默认 `min-width:auto` 撑爆父容器）
+- 🔴 **P0** 修复 `<ai-chat>` 输入区不沉底
+  - 对内部 `<ai-input>` 与 `slot[name="footer"]` 增加 `flex:0 0 auto` 兜底，避免父高度紧张时被压缩到 0
+  - README 增加宿主"父容器需有确定高度"的布局约束说明
+- 🟡 **P1** 修复发送按钮禁用态视觉对比度过弱
+  - 禁用态改用 `#d9d9d9` 背景 + `rgba(0,0,0,0.25)` 文字，`opacity:1`
+  - 暴露 `--ai-input-send-bg(-disabled)` / `--ai-input-send-color(-disabled)` 四个 CSS 变量供主题覆盖
+- 🟡 **P1** `<ai-chat>` 新增 `input-placeholder` / `send-text` 属性，透传给内部 `<ai-input>`
+- 🟡 **P1** `<ai-chat>` 新增 `ai-chat-ready` 生命周期事件（`firstUpdated` 派发），便于宿主在懒挂载 / SSR / StrictMode 场景规避 `.messages` 赋值竞态
+- 🟢 **P2** `<ai-chat>` 新增 `<slot name="input">`，宿主可整体替换输入区（上传 / 录音 / @提及 / 富文本输入等）
+- 🟢 **P2** `messages` 属性增加 `hasChanged`：除引用变更外，长度变化也视为变更，原地 `push` 也能触发重渲染（仍推荐"新引用"写法）
+- 📝 README 新增"React 集成常见坑（必读）"章节，覆盖布尔属性命名、property 赋值、自定义事件监听、StrictMode 去重、`ai-chat-ready` 用法、`messages` 引用规范
 
 ### 0.2.2 (2026-05-15)
 
