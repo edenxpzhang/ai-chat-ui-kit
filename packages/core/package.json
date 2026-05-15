@@ -1,6 +1,6 @@
 {
   "name": "@ai-chat-ui-kit/core",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Core logic layer for AI Chat UI Kit (Headless)",
   "type": "module",
   "main": "dist/index.cjs",
@@ -25,7 +25,8 @@
   },
   "files": [
     "dist",
-    "README.md"
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
     "dev": "tsup --watch",

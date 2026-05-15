@@ -1,6 +1,6 @@
 {
   "name": "@ai-chat-ui-kit/themes",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Theme packages for AI Chat UI Kit",
   "main": "dist/index.js",
   "repository": {
@@ -24,7 +24,8 @@
   },
   "files": [
     "dist",
-    "README.md"
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
     "dev": "tsup --watch",
