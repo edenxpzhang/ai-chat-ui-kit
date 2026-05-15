@@ -1,6 +1,6 @@
 # @ai-chat-ui-kit/themes
 
-Theme packages for AI Chat UI Kit - 6 beautiful pre-built themes.
+Theme packages for AI Chat UI Kit - 6 beautiful pre-built themes + runtime apply API.
 
 ![Version](https://img.shields.io/npm/v/@ai-chat-ui-kit/themes.svg)
 ![License](https://img.shields.io/npm/l/@ai-chat-ui-kit/themes.svg)
@@ -8,10 +8,11 @@ Theme packages for AI Chat UI Kit - 6 beautiful pre-built themes.
 ## ✨ Features
 
 - 🎨 **6 Built-in Themes** - Minimal, Neon, Glass, Terminal, Gradient, Corporate
-- 🎭 **Easy to Use** - Just import and apply
-- 🔄 **Runtime Switching** - Switch themes dynamically
-- 🎯 **TypeScript Support** - Complete theme type definitions
-- 📦 **Lightweight** - CSS only, no JavaScript overhead
+- 🎯 **Runtime apply API** - `applyTheme(theme, target?)`，支持局部/全局换肤
+- 🪟 **局部换肤（v0.2+）** - 弹窗内独立主题，不污染全站
+- 🔄 **Runtime Switching** - 动态切换、移除、查询主题
+- 🎯 **TypeScript Support** - 完整类型定义
+- 📦 **Lightweight** - 纯数据 + 少量运行时 API
 
 ## 📦 Installation
 
@@ -19,221 +20,162 @@ Theme packages for AI Chat UI Kit - 6 beautiful pre-built themes.
 pnpm add @ai-chat-ui-kit/themes
 # or
 npm install @ai-chat-ui-kit/themes
-# or
-yarn add @ai-chat-ui-kit/themes
 ```
 
 ## 🚀 Quick Start
 
-### Import Themes
+### 全局换肤（最常见）
 
-```typescript
-// Import all themes
-import '@ai-chat-ui-kit/themes/minimal';
-import '@ai-chat-ui-kit/themes/neon';
-import '@ai-chat-ui-kit/themes/glass';
-import '@ai-chat-ui-kit/themes/terminal';
-import '@ai-chat-ui-kit/themes/gradient';
-import '@ai-chat-ui-kit/themes/corporate';
-```
-
-### Apply Theme at Runtime
-
-```typescript
+```ts
 import { applyTheme } from '@ai-chat-ui-kit/themes';
-import { minimalTheme } from '@ai-chat-ui-kit/themes/minimal';
-import { neonTheme } from '@ai-chat-ui-kit/themes/neon';
-import { glassTheme } from '@ai-chat-ui-kit/themes/glass';
-import { terminalTheme } from '@ai-chat-ui-kit/themes/terminal';
-import { gradientTheme } from '@ai-chat-ui-kit/themes/gradient';
-import { corporateTheme } from '@ai-chat-ui-kit/themes/corporate';
 
-// Apply minimal theme
-applyTheme(minimalTheme);
+// 用主题名（推荐，最简洁）
+applyTheme('glass');
 
-// Switch to neon theme
-applyTheme(neonTheme);
-```
-
-## 🎨 Available Themes
-
-### 1. Minimal (Default)
-
-Clean Apple-style design with rounded bubbles and blue-white color scheme.
-
-```typescript
-import { minimalTheme } from '@ai-chat-ui-kit/themes/minimal';
-applyTheme(minimalTheme);
-```
-
-**Features:**
-- Rounded bubbles (18px border-radius)
-- Blue user bubbles, light gray assistant bubbles
-- Clean sans-serif font
-- Subtle shadows
-
----
-
-### 2. Neon (Cyberpunk Dark)
-
-Dark theme with neon glow effects, perfect for developer tools.
-
-```typescript
-import { neonTheme } from '@ai-chat-ui-kit/themes/neon';
-applyTheme(neonTheme);
-```
-
-**Features:**
-- Dark background (#0a0a0a)
-- Neon blue/pink glow effects
-- Monospace font
-- Animated glow on hover
-
----
-
-### 3. Glass (Glassmorphism)
-
-Modern glassmorphism design with translucent blur effects.
-
-```typescript
-import { glassTheme } from '@ai-chat-ui-kit/themes/glass';
+// 或传 ThemeConfig 对象
+import { glassTheme } from '@ai-chat-ui-kit/themes';
 applyTheme(glassTheme);
 ```
 
-**Features:**
-- Translucent backgrounds with backdrop blur
-- Semi-transparent bubbles
-- Light, airy feel
-- Subtle border highlights
+### 局部换肤（弹窗 / 子页面独立主题，不污染全站）
 
----
+```tsx
+import { useEffect, useRef } from 'react';
+import { applyTheme, removeTheme } from '@ai-chat-ui-kit/themes';
 
-### 4. Terminal (Retro)
+function ChatModal() {
+  const containerRef = useRef<HTMLDivElement>(null);
 
-Retro terminal style with green text and scanlines.
+  useEffect(() => {
+    if (!containerRef.current) return;
+    // 第二个参数传入 target 元素，主题只作用于该元素的子树
+    applyTheme('glass', containerRef.current);
+    return () => removeTheme(containerRef.current!);
+  }, []);
 
-```typescript
-import { terminalTheme } from '@ai-chat-ui-kit/themes/terminal';
-applyTheme(terminalTheme);
+  return (
+    <div ref={containerRef}>
+      <ai-chat />
+    </div>
+  );
+}
 ```
 
-**Features:**
-- Dark background with green text
-- Monospace font (Courier New)
-- Scanline animation
-- Blinking cursor effect
+实现细节：
+- CSS Variables 写入 `target.style`（局部 scope）
+- `theme.styles` 的选择器自动加上 `[data-aikit-scope="aikit-xxx"]` 前缀
+- `:root` 选择器被重写为 scope 选择器自身
+- 通过 `data-aikit-theme="<name>"` 标记当前主题，可用 `getCurrentTheme(target)` 查询
 
----
+### 切换 / 移除主题
 
-### 5. Gradient (Colorful)
+```ts
+import { applyTheme, removeTheme, getCurrentTheme } from '@ai-chat-ui-kit/themes';
 
-Vibrant gradient bubbles with pop animations.
+applyTheme('minimal');
+console.log(getCurrentTheme()); // 'minimal'
 
-```typescript
-import { gradientTheme } from '@ai-chat-ui-kit/themes/gradient';
-applyTheme(gradientTheme);
+applyTheme('neon');             // 自动覆盖旧主题
+console.log(getCurrentTheme()); // 'neon'
+
+removeTheme();                  // 完全移除（清空 variables + 删除注入的 <style>）
+console.log(getCurrentTheme()); // null
 ```
 
-**Features:**
-- Gradient backgrounds (blue-purple-pink)
-- Pop-in animation for new messages
-- Playful, modern feel
-- Rounded corners
+### 通过字典按名查询主题
 
----
+```ts
+import { themes } from '@ai-chat-ui-kit/themes';
 
-### 6. Corporate (Professional)
+console.log(Object.keys(themes));
+// ['minimal', 'neon', 'glass', 'terminal', 'gradient', 'corporate']
 
-Clean, professional design suitable for enterprise applications.
-
-```typescript
-import { corporateTheme } from '@ai-chat-ui-kit/themes/corporate';
-applyTheme(corporateTheme);
+applyTheme(themes['glass']);
 ```
 
-**Features:**
-- Professional blue theme
-- Clean, structured layout
-- Business-appropriate styling
-- Clear typography
+## 📖 API Reference
 
----
+### `applyTheme(theme, target?)`
 
-## 📖 Theme Type Definition
+| 参数 | 类型 | 说明 |
+| --- | --- | --- |
+| `theme` | `ThemeConfig \| string` | 主题对象或主题名 |
+| `target` | `HTMLElement \| null` | 应用目标，省略 → `document.documentElement` 全局换肤 |
 
-```typescript
-interface Theme {
+### `removeTheme(target?)`
+
+| 参数 | 类型 | 说明 |
+| --- | --- | --- |
+| `target` | `HTMLElement \| null` | 目标元素，省略 → 移除全局主题 |
+
+### `getCurrentTheme(target?)`
+
+返回当前主题名 string，未应用则返回 `null`。
+
+### `themes`
+
+`Record<string, ThemeConfig>` 类型字典，包含所有内置主题。
+
+## 🎨 Available Themes
+
+| 主题名 | 描述 | 适用场景 |
+| --- | --- | --- |
+| `minimal` | 极简苹果风，蓝白配色 | 通用 / 移动端 |
+| `neon` | 赛博朋克霓虹深色 | 开发者工具 / AI 产品 |
+| `glass` | 毛玻璃拟态 | 现代 SaaS / 弹窗 |
+| `terminal` | 复古终端 + 扫描线 | CLI / 终端类产品 |
+| `gradient` | 多彩渐变气泡 | 社交 / 年轻化 |
+| `corporate` | 企业蓝商务风 | B 端 / 企业应用 |
+
+## 📖 Type Definition
+
+```ts
+interface ThemeConfig {
   name: string;
-  colors: {
-    primary: string;
-    secondary: string;
-    background: string;
-    surface: string;
-    text: string;
-    textSecondary: string;
-  };
-  typography: {
-    fontFamily: string;
-    fontSize: number;
-    lineHeight: number;
-  };
-  spacing: {
-    small: number;
-    medium: number;
-    large: number;
-  };
-  borderRadius: number;
+  variables: Record<string, string>;  // CSS Variables
+  styles: string;                      // 主题 CSS（字符串）
 }
 ```
 
 ## 🎨 Custom Theme
 
-You can create your own theme by implementing the `Theme` interface:
+可以实现 `ThemeConfig` 接口自定义主题：
 
-```typescript
-import { applyTheme, Theme } from '@ai-chat-ui-kit/themes';
+```ts
+import { applyTheme, type ThemeConfig } from '@ai-chat-ui-kit/themes';
 
-const myCustomTheme: Theme = {
+const myTheme: ThemeConfig = {
   name: 'my-theme',
-  colors: {
-    primary: '#ff6b6b',
-    secondary: '#4ecdc4',
-    background: '#ffffff',
-    surface: '#f8f9fa',
-    text: '#212529',
-    textSecondary: '#6c757d'
+  variables: {
+    '--ai-primary': '#ff6b6b',
+    '--ai-bg-primary': '#ffffff',
+    // ...
   },
-  typography: {
-    fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
-    fontSize: 14,
-    lineHeight: 1.5
-  },
-  spacing: {
-    small: 8,
-    medium: 16,
-    large: 24
-  },
-  borderRadius: 12
+  styles: `
+    .ai-chat__header { background: var(--ai-primary); }
+    .ai-message--user .ai-message__content { background: var(--ai-primary); }
+  `,
 };
 
-applyTheme(myCustomTheme);
+applyTheme(myTheme);
 ```
 
-## 📦 Dependencies
+## 📜 Changelog
 
-None! This package is CSS-only.
+### 0.2.0 (2026-05-15)
 
-## 🤝 Contributing
+- 🎉 新增 `applyTheme(theme, target?)`、`removeTheme(target?)`、`getCurrentTheme(target?)` 运行时 API
+- 🎉 支持**局部换肤**：传入 `target` 元素，主题只作用于该元素子树，不污染全站
+- 🎉 新增 `themes` 字典导出（`Record<string, ThemeConfig>`）
+- 🐛 修复 `tsup` entry 中的历史遗留 `default/bubble/flat` 路径
 
-Contributions welcome! Please read our [contributing guidelines](https://github.com/edenxpzhang/ai-chat-ui-kit/blob/master/CONTRIBUTING.md).
+### 0.1.1
+
+- 6 套内置主题数据对象首版
 
 ## 📄 License
 
 [MIT License](https://github.com/edenxpzhang/ai-chat-ui-kit/blob/master/LICENSE)
-
-## 👤 Author
-
-edenxpzhang
 
 ## 🔗 Links
 

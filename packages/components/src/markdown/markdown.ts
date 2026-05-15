@@ -176,6 +176,56 @@ export class AiMarkdown extends LitElement {
   @property({ type: Array })
   plugins: string[] = [];
 
+  /**
+   * 流式模式
+   *
+   * 为 true 时表示当前正在接收流式 chunk；目前与默认行为一致（都走全量 reparse），
+   * 后续可在此基础上接入 DOM diff 实现真正的增量渲染。
+   * 该属性主要用于宿主标识 + 触发 ai-markdown-rendered 事件时附带 streaming 状态。
+   */
+  @property({ type: Boolean })
+  streaming = false;
+
+  /**
+   * 追加内容（流式场景）
+   *
+   * 等价于 `this.content += chunk`，但语义更明确，便于后续优化为
+   * 「不重新解析整段、只追加渲染新增 chunk」。
+   *
+   * @example
+   * ```ts
+   * const md = document.querySelector('ai-markdown')!;
+   * md.streaming = true;
+   * stream.on('data', chunk => md.appendContent(chunk));
+   * stream.on('end', () => { md.streaming = false; });
+   * ```
+   */
+  appendContent(chunk: string): void {
+    if (!chunk) return;
+    this.content = (this.content || '') + chunk;
+  }
+
+  /**
+   * 重置内容（用于重新开始流式接收）
+   */
+  resetContent(): void {
+    this.content = '';
+  }
+
+  updated() {
+    // 渲染完成事件，宿主可用于自动滚动到底
+    this.dispatchEvent(
+      new CustomEvent('ai-markdown-rendered', {
+        detail: {
+          contentLength: this.content.length,
+          streaming: this.streaming,
+        },
+        bubbles: true,
+        composed: true,
+      })
+    );
+  }
+
   render() {
     const hasMermaidContent = hasMermaid(this.content);
     const hasLatexContent = hasLatex(this.content);
