@@ -21,6 +21,21 @@ Web Components for AI Chat UI Kit - Built with Lit, framework-agnostic.
 pnpm add @ai-chat-ui-kit/components @ai-chat-ui-kit/themes
 ```
 
+## 🎨 引入样式（必读）
+
+`<ai-chat>` 等组件默认走 light DOM（`headless = true`），因此**需要把组件的 light DOM 兜底样式注入到页面**。任选一种方式：
+
+```ts
+// 推荐：通过 ./style.css 子路径（与 antd / element-plus 风格一致）
+import '@ai-chat-ui-kit/components/style.css';
+
+// 或：直接指定 dist 路径（向后兼容）
+import '@ai-chat-ui-kit/components/dist/index.css';
+```
+
+> **v0.2.1+**：包 `sideEffects` 已声明 `**/*.css`，构建工具会自动保留 css 副作用。
+> **headless 模式**：若你完全自己写样式，可设 `<ai-chat headless>` 但不引入 style.css（详见下方）。
+
 ## 🚀 Quick Start
 
 ### React + 受控模式（推荐）
@@ -305,7 +320,45 @@ applyTheme('glass', modalContainer);
 
 详细 API 见 [`@ai-chat-ui-kit/themes`](../themes/README.md)。
 
+## 🧱 Headless 模式
+
+所有组件都暴露了 `headless` 属性，**默认 `true`**。其含义如下：
+
+| `headless` | 渲染策略 | 适用场景 |
+| --- | --- | --- |
+| `true`（默认） | 走 **light DOM**：组件 DOM 出现在外部树中，可被全局 CSS / 主题包样式命中 | 99% 的业务场景，配合 `@ai-chat-ui-kit/themes` 使用 |
+| `false` | 走 **Shadow DOM**：组件样式与外部完全隔离 | 嵌入到样式复杂的第三方页面、需要 100% 样式隔离时 |
+
+```html
+<!-- 默认：light DOM + 引入 style.css + 主题 -->
+<ai-chat></ai-chat>
+
+<!-- Shadow DOM：完全样式隔离，外部 CSS 进不去，需自带样式 -->
+<ai-chat headless="false"></ai-chat>
+```
+
+⚠️ **headless=false 时不要引入 `./style.css`**：light DOM 样式无法穿透 Shadow DOM；同时 `applyTheme(theme, target)` 的局部模式对 Shadow DOM 内部不生效（因为 CSS Variables 不会自动透传到 closed shadow root）。如需 Shadow DOM 内换肤，可在 `headless=false` 模式下：
+
+```ts
+// 拿到 shadowRoot 后手动注入
+const chatEl = document.querySelector('ai-chat')!;
+const shadow = (chatEl as any).renderRoot as ShadowRoot;
+applyTheme('glass', shadow.host as HTMLElement); // 仍走 light DOM API
+```
+
+
+
 ## 📜 Changelog
+
+### 0.2.1 (2026-05-15)
+
+- 🔴 修复 `package.json#exports` 缺少 css 导出（导致 Vite/Node 严格模式下 `import '@ai-chat-ui-kit/components/dist/index.css'` 失败）
+- 🎉 新增 `./style.css` / `./style` 子路径导出（与 antd / element-plus 风格一致）
+- 🎉 保留 `./dist/index.css` 路径以向后兼容已有用法
+- 🎉 新增顶层 `style` 字段（兼容 webpack mainFields）
+- 🎉 声明 `sideEffects: ["**/*.css", "./dist/index.js", "./dist/index.cjs"]`，确保构建工具保留 CSS 副作用
+- 📝 README 增加「引入样式（必读）」一节
+- 📝 README 增加「Headless 模式」一节文档
 
 ### 0.2.0 (2026-05-15)
 
