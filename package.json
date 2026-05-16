@@ -1,6 +1,6 @@
 {
   "name": "ai-chat-ui-kit",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "AI Chat UI Kit - Web Components based chat UI with headless mode",
   "type": "module",
   "scripts": {
@@ -26,6 +26,10 @@
   ],
   "author": "eden_zxpzhang",
   "license": "MIT",
+  "files": [
+    "README.md",
+    "LICENSE"
+  ],
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
