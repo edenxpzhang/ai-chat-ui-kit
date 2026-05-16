@@ -1,7 +1,3 @@
-/**
- * @generated-by AI: edenxpzhang
- * @generated-date 2026-05-13
- */
 
 import { APIAdapter, ModelConfig } from '../types/index.js';
 import { OpenAIAdapter } from './adapters.js';

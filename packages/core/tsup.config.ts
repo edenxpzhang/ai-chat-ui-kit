@@ -1,7 +1,4 @@
-/**
- * @generated-by AI: edenxpzhang
- * @generated-date 2026-05-13
- */
+
 import { defineConfig } from 'tsup';
 
 export default defineConfig({

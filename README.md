@@ -1,7 +1,4 @@
-/**
- * @generated-by AI: edenxpzhang
- * @generated-date 2026-05-13
- */
+
 # AI Chat UI Kit
 
 ![Version](https://img.shields.io/badge/version-0.1.0-blue.svg)

@@ -1,26 +1,3 @@
-/**
- * @generated-by AI: edenxpzhang
- * @generated-date 2026-05-15
- *
- * React JSX type augmentation for AI Chat UI Kit Web Components.
- *
- * 使用方式（任选其一）：
- *
- *  1. 全局引入（推荐，放在项目入口/tsconfig 的 types 里）
- *     ```ts
- *     /// <reference types="@ai-chat-ui-kit/components/react" />
- *     ```
- *
- *  2. 通过 tsconfig.compilerOptions.types
- *     ```json
- *     { "compilerOptions": { "types": ["@ai-chat-ui-kit/components/react"] } }
- *     ```
- *
- *  3. 直接 import（任意一处即可，副作用：仅扩充 JSX 命名空间）
- *     ```ts
- *     import '@ai-chat-ui-kit/components/react';
- *     ```
- */
 import type * as React from 'react';
 import type { Message, ToolCall, ModelConfig } from './types.js';
 

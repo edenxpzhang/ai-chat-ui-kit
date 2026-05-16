@@ -1,8 +1,3 @@
-/**
- * @generated-by AI: edenxpzhang
- * @generated-date 2026-05-13
- * @updated 2026-05-15  增加 actions / footer / content-extra 三个 slot 与 ai-message-action 事件
- */
 
 import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';

@@ -1,8 +1,3 @@
-/**
- * @generated-by AI: edenxpzhang
- * @generated-date 2026-05-13
- * @updated 2026-05-15  新增 applyTheme/removeTheme/getCurrentTheme/themes 字典
- */
 
 export { minimalTheme } from './minimal/index.js';
 export { neonTheme } from './neon/index.js';

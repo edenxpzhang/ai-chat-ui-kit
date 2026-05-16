@@ -1,7 +1,3 @@
-/**
- * @generated-by AI: edenxpzhang
- * @generated-date 2026-05-13
- */
 
 // 导入所有组件
 import { AiChat } from './chat/chat.js';

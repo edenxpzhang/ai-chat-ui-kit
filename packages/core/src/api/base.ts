@@ -1,7 +1,3 @@
-/**
- * @generated-by AI: edenxpzhang
- * @generated-date 2026-05-13
- */
 
 import { APIAdapter, Message, ModelConfig, ChatConfig, ToolCall } from '../types/index.js';
 

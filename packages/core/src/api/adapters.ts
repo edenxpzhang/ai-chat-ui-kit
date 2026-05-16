@@ -1,7 +1,3 @@
-/**
- * @generated-by AI: edenxpzhang
- * @generated-date 2026-05-13
- */
 
 import { BaseAPIAdapter } from './base.js';
 import { MessageRole, Message, ModelConfig, ChatConfig, ToolCall } from '../types/index.js';

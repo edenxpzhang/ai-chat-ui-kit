@@ -1,6 +1,6 @@
 {
   "name": "@ai-chat-ui-kit/components",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Web Components for AI Chat UI Kit (Lit)",
   "type": "module",
   "license": "MIT",

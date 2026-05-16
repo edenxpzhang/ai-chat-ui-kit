@@ -1,8 +1,4 @@
-/**
- * @generated-by AI: edenxpzhang
- * @generated-date 2026-05-13
- * @updated 2026-05-15  修正 entry 去掉历史 default/bubble/flat
- */
+
 import { defineConfig } from 'tsup';
 
 export default defineConfig({

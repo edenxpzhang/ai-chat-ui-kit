@@ -1,19 +1,3 @@
-/**
- * @generated-by AI: edenxpzhang
- * @generated-date 2026-05-15
- *
- * Runtime Theme Application API
- *
- * - applyTheme(theme, target?)    把主题应用到 target（默认 document.documentElement）
- * - removeTheme(target?)          移除 target 上的主题
- * - getCurrentTheme(target?)      查询 target 当前主题名
- * - themes                        所有内置主题字典，可通过 name 索引
- *
- * 关键设计：
- *  target 不传时为全局换肤（写到 :root / document.head）
- *  target 传入元素时为局部换肤（CSS 变量写在该元素 style 上、styles 用 data-aikit-scope 属性
- *  做选择器前缀重写，注入到 target 内部，避免污染全站）
- */
 import type { ThemeConfig } from './types.js';
 import { minimalTheme } from './minimal/index.js';
 import { neonTheme } from './neon/index.js';

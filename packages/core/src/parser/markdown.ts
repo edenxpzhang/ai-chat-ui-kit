@@ -1,7 +1,3 @@
-/**
- * @generated-by AI: edenxpzhang
- * @generated-date 2026-05-13
- */
 
 import { Marked } from 'marked';
 import { markedHighlight } from 'marked-highlight';

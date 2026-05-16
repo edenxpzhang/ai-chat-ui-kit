@@ -1,7 +1,3 @@
-/**
- * @generated-by AI: edenxpzhang
- * @generated-date 2026-05-13
- */
 
 // 简单的事件发射器（用于状态管理）
 export class EventEmitter {

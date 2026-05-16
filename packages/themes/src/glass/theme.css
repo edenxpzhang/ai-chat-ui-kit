@@ -1,11 +1,3 @@
-/**
- * @generated-by AI: edenxpzhang
- * @generated-date 2026-05-13
- *
- * Glassmorphism —— 毛玻璃拟态
- * 对齐 docs/chat-style-3-glass.html
- */
-
 :root[data-theme='glass'],
 .ai-theme-glass {
   --ai-primary: rgba(102, 126, 234, 0.6);

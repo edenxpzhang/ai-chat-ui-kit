@@ -1,7 +1,4 @@
-/**
- * @generated-by AI: edenxpzhang
- * @generated-date 2026-05-13
- */
+
 import { describe, it, expect } from 'vitest';
 import { parseMarkdown, detectMarkdown } from './markdown';
 

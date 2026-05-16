@@ -1,7 +1,3 @@
-/**
- * @generated-by AI: edenxpzhang
- * @generated-date 2026-05-13
- */
 
 import type { ThemeConfig } from '../types.js';
 import themeStyles from './theme.css?raw';

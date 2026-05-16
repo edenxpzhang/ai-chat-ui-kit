@@ -1,8 +1,3 @@
-/**
- * @generated-by AI: edenxpzhang
- * @generated-date 2026-05-13
- * @updated 2026-05-15  新增 controlled 模式 + ai-chat-send / ai-chat-action 事件
- */
 
 import { LitElement, html, PropertyValues } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';

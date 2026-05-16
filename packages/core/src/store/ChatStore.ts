@@ -1,7 +1,3 @@
-/**
- * @generated-by AI: edenxpzhang
- * @generated-date 2026-05-13
- */
 
 import { BaseStore } from './base.js';
 import { ChatState, Message, MessageRole, ChatConfig } from '../types/index.js';

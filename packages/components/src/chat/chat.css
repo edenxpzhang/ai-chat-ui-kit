@@ -1,11 +1,3 @@
-/**
- * @generated-by AI: edenxpzhang
- * @generated-date 2026-05-13
- *
- * 仅作为最小内置兜底样式（当用户没引入任何主题时仍能正常显示）。
- * 任何视觉风格（颜色/圆角/阴影/字体）都应由主题包接管，本文件不应硬编码风格细节。
- */
-
 ai-chat {
   display: block;
   width: 100%;
