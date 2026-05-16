@@ -1,7 +1,11 @@
 
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import './markdown.css';
+import markdownCss from './markdown.css';
+import { injectStyle } from '../utils/style-injector.js';
+
+// light DOM 样式注入
+injectStyle('ai-markdown', markdownCss as unknown as string);
 
 // 简单的 Markdown 解析器（等待 core 包完成后替换为实际导入）
 function parseMarkdown(content: string): string {

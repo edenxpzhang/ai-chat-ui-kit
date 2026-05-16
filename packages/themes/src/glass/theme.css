@@ -100,13 +100,14 @@ body[data-theme='glass']::after {
   background: transparent;
   padding: 20px;
   gap: 14px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 .ai-theme-glass .ai-chat__messages::-webkit-scrollbar,
-[data-theme='glass'] .ai-chat__messages::-webkit-scrollbar { width: 6px; }
+[data-theme='glass'] .ai-chat__messages::-webkit-scrollbar { width: 0; height: 0; display: none; }
 .ai-theme-glass .ai-chat__messages::-webkit-scrollbar-thumb,
 [data-theme='glass'] .ai-chat__messages::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.5);
-  border-radius: 3px;
+  background: transparent;
 }
 
 /* Message */
@@ -158,24 +159,34 @@ body[data-theme='glass']::after {
 [data-theme='glass'] .ai-input__textarea {
   flex: 1;
   padding: 12px 18px;
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.9);
   border-radius: 20px;
-  color: #fff;
+  color: #1f1f1f;
+  caret-color: #667eea;
   font-size: 14px;
   outline: none;
   resize: none;
   min-height: 44px;
   max-height: 120px;
+  box-shadow: 0 2px 8px rgba(31, 38, 135, 0.15);
   transition: all 0.3s;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
+.ai-theme-glass .ai-input__textarea::-webkit-scrollbar,
+[data-theme='glass'] .ai-input__textarea::-webkit-scrollbar { width: 0; height: 0; display: none; }
 .ai-theme-glass .ai-input__textarea::placeholder,
-[data-theme='glass'] .ai-input__textarea::placeholder { color: rgba(255, 255, 255, 0.7); }
+[data-theme='glass'] .ai-input__textarea::placeholder { color: rgba(0, 0, 0, 0.45); }
 .ai-theme-glass .ai-input__textarea:focus,
-[data-theme='glass'] .ai-input__textarea:focus {
-  background: rgba(255, 255, 255, 0.4);
-  border-color: rgba(255, 255, 255, 0.8);
+.ai-theme-glass .ai-input__textarea:focus-visible,
+[data-theme='glass'] .ai-input__textarea:focus,
+[data-theme='glass'] .ai-input__textarea:focus-visible {
+  outline: none;
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2), 0 4px 12px rgba(31, 38, 135, 0.18);
 }
 .ai-theme-glass .ai-input__send,
 [data-theme='glass'] .ai-input__send {

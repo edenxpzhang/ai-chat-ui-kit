@@ -1,10 +1,14 @@
 
 import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import './message.css';
+import messageCss from './message.css';
+import { injectStyle } from '../utils/style-injector.js';
 
 // 导入共享类型
 import { Message } from '../types.js';
+
+// light DOM 样式注入
+injectStyle('ai-message', messageCss as unknown as string);
 
 @customElement('ai-message')
 export class AiMessage extends LitElement {

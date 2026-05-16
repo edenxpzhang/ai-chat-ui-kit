@@ -43,7 +43,7 @@
   ],
   "scripts": {
     "dev": "tsup --watch",
-    "build": "tsup && node -e \"require('fs').copyFileSync('src/react.d.ts', 'dist/react.d.ts')\""
+    "build": "tsup && node scripts/bundle-css.cjs && node -e \"require('fs').copyFileSync('src/react.d.ts', 'dist/react.d.ts')\""
   },
   "dependencies": {
     "lit": "^3.0.0"

@@ -9,6 +9,9 @@ ai-input .ai-input {
   padding: 12px 16px;
   width: 100%;
   box-sizing: border-box;
+  background: var(--ai-input-bg, #fff);
+  border-top: 1px solid var(--ai-input-border-top, #e8e8e8);
+  box-shadow: var(--ai-input-shadow, 0 -2px 8px rgba(0, 0, 0, 0.04));
 }
 
 ai-input .ai-input__wrapper {
@@ -23,7 +26,7 @@ ai-input .ai-input__textarea {
   min-width: 0;
   resize: none;
   outline: none;
-  border: 1px solid #e8e8e8;
+  border: 1px solid var(--ai-input-textarea-border, #e8e8e8);
   border-radius: 8px;
   padding: 10px 12px;
   font-family: inherit;
@@ -31,9 +34,30 @@ ai-input .ai-input__textarea {
   line-height: 1.5;
   min-height: 40px;
   max-height: 120px;
-  background: #fff;
-  color: inherit;
+  background: var(--ai-input-textarea-bg, #fff);
+  color: var(--ai-input-textarea-color, rgba(0, 0, 0, 0.88));
+  caret-color: var(--ai-input-textarea-caret, #1677ff);
   box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+ai-input .ai-input__textarea::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+ai-input .ai-input__textarea::placeholder {
+  color: var(--ai-input-textarea-placeholder, rgba(0, 0, 0, 0.35));
+}
+
+ai-input .ai-input__textarea:focus,
+ai-input .ai-input__textarea:focus-visible {
+  outline: none;
+  border-color: var(--ai-input-textarea-border-focus, #1677ff);
+  box-shadow: var(--ai-input-textarea-shadow-focus, 0 0 0 2px rgba(22, 119, 255, 0.1));
 }
 
 ai-input .ai-input__send {
